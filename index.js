@@ -1,52 +1,42 @@
-const tetris = document.querySelector('#tetris');
+import { Table } from './modules/table.js';
+import { TypeA } from './modules/block.js';
 
-let tetrisData = [];
+const table = new Table();
+const typeA = new TypeA();
 
-generateTable();
+table.generate();
 
-window.addEventListener('keydown', (e) => {
-    switch (e.code) {
-        case 'ArrowDown':
-            console.log('ArrowDown');
-            break;
-        case 'ArrowLeft':
-            console.log('ArrowLeft');
-            break;
-        case 'ArrowRight':
-            console.log('ArrowRight');
-            break;
-        default:
-            break;
-    }
-});
+table.setData(typeA.getCoordinates());
 
-window.addEventListener('keyup', (e) => {
-    switch (e.code) {
-        case 'Space':
-            console.log('Space');
-            break;
-        case 'ArrowUp':
-            console.log('ArrowUp');
-            break;
-        default:
-            break;
-    }
-});
+console.log(table.getData());
 
-function generateTable() {
-    const fragment = document.createDocumentFragment();
-    const rowLength = 10;
-    const columnLength = 20;
-    for (let i = 0; i < columnLength; i++) {
-        const tr = document.createElement('tr');
-        let array = [];
-        tetrisData.push(array);
-        fragment.appendChild(tr);
-        for (let i = 0; i < rowLength; i++) {
-            const td = document.createElement('td');
-            tr.appendChild(td);
-            array.push(0);
+function keyInput() {
+    window.addEventListener('keydown', (e) => {
+        switch (e.code) {
+            case 'ArrowDown':
+                console.log('ArrowDown');
+                break;
+            case 'ArrowLeft':
+                console.log('ArrowLeft');
+                break;
+            case 'ArrowRight':
+                console.log('ArrowRight');
+                break;
+            default:
+                break;
         }
-    }
-    tetris.appendChild(fragment);
+    });
+
+    window.addEventListener('keyup', (e) => {
+        switch (e.code) {
+            case 'Space':
+                console.log('Space');
+                break;
+            case 'ArrowUp':
+                console.log('ArrowUp');
+                break;
+            default:
+                break;
+        }
+    });
 }
