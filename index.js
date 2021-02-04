@@ -1,12 +1,21 @@
 import { Table } from './modules/table.js';
-import { TypeA } from './modules/block.js';
+import { Block, TypeA, TypeB, TypeC, TypeD, TypeE, TypeF, TypeG } from './modules/block.js';
 
 const table = new Table();
-const typeA = new TypeA();
+
+const type = []
+
+type[0] = new TypeA();
+type[1] = new TypeB();
+type[2] = new TypeC();
+type[3] = new TypeD();
+type[4] = new TypeE();
+type[5] = new TypeF();
+type[6] = new TypeG();
 
 table.generate();
 
-table.setData(typeA.getCoordinates());
+table.setData(type[0].getCoordinates());
 
 console.log(table.getData());
 
