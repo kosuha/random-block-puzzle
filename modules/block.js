@@ -1,25 +1,33 @@
 class Block {
-    constructor() {
+    constructor(_structure, _color) {
+        this.structure = _structure;
         this.coordinateX = 0;
         this.coordinateY = 3;
+        this.coordinates = [
+            [this.coordinateX + this.structure[0][0], this.coordinateY + this.structure[0][1]],
+            [this.coordinateX + this.structure[1][0], this.coordinateY + this.structure[1][1]],
+            [this.coordinateX + this.structure[2][0], this.coordinateY + this.structure[2][1]],
+            [this.coordinateX + this.structure[3][0], this.coordinateY + this.structure[3][1]]
+        ];
         this.state = true; // true 움직임, false 멈춤
+        this.color = _color;
     }
 
-}
-
-class TypeA extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 1],
-            [this.coordinateX + 0, this.coordinateY + 2],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2]
-        ];
-        this.color = 'yellow';
+    gravity() {
+        let ground = 19;
+        if (this.coordinates[0][0] < ground && this.coordinates[1][0] < ground && this.coordinates[2][0] < ground && this.coordinates[3][0] < ground) {
+            this.coordinateX++;
+            this.state = false;
+        }
     }
 
     getCoordinates() {
+        this.coordinates = [
+            [this.coordinateX + this.structure[0][0], this.coordinateY + this.structure[0][1]],
+            [this.coordinateX + this.structure[1][0], this.coordinateY + this.structure[1][1]],
+            [this.coordinateX + this.structure[2][0], this.coordinateY + this.structure[2][1]],
+            [this.coordinateX + this.structure[3][0], this.coordinateY + this.structure[3][1]]
+        ];
         return this.coordinates;
     }
 
@@ -28,130 +36,4 @@ class TypeA extends Block {
     }
 }
 
-class TypeB extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 1, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2],
-            [this.coordinateX + 1, this.coordinateY + 3]
-        ];
-        this.color = 'skyblue';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-class TypeC extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2]
-        ];
-        this.color = 'violet';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-class TypeD extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2]
-        ];
-        this.color = 'blue';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-class TypeE extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 2],
-            [this.coordinateX + 1, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2]
-        ];
-        this.color = 'orange';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-class TypeF extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 0],
-            [this.coordinateX + 0, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 1],
-            [this.coordinateX + 1, this.coordinateY + 2]
-        ];
-        this.color = 'red';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-class TypeG extends Block {
-    constructor() {
-        super();
-        this.coordinates = [
-            [this.coordinateX + 0, this.coordinateY + 1],
-            [this.coordinateX + 0, this.coordinateY + 2],
-            [this.coordinateX + 1, this.coordinateY + 0],
-            [this.coordinateX + 1, this.coordinateY + 1]
-        ];
-        this.color = 'green';
-    }
-
-    getCoordinates() {
-        return this.coordinates;
-    }
-
-    getColor() {
-        return this.color;
-    }
-}
-
-export { Block, TypeA, TypeB, TypeC, TypeD, TypeE, TypeF, TypeG };
+export { Block };

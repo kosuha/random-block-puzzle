@@ -1,37 +1,42 @@
 import { Table } from './modules/table.js';
-import { Block, TypeA, TypeB, TypeC, TypeD, TypeE, TypeF, TypeG } from './modules/block.js';
+import { Block } from './modules/block.js';
 
 const table = new Table();
 
 table.generate();
-
 let randomBlock = randomBlockGenerator();
-table.setData(randomBlock.getCoordinates(), randomBlock.getColor());
 table.display();
+
+setInterval(() => {
+    table.cleanData();
+    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor());
+    table.display();
+    randomBlock.gravity();
+}, 100);
 
 function randomBlockGenerator() {
     let randomNumber = Math.floor(Math.random() * 7);
-    
+
     if (randomNumber === 0) {
-        return new TypeA();
+        return new Block([[0, 1], [0, 2], [1, 1], [1, 2]], 'yellow');
     }
     if (randomNumber === 1) {
-        return new TypeB();
+        return new Block([[1, 0], [1, 1], [1, 2], [1, 3]], 'skyblue');
     }
     if (randomNumber === 2) {
-        return new TypeC();
+        return new Block([[0, 1], [1, 0], [1, 1], [1, 2]], 'violet');
     }
     if (randomNumber === 3) {
-        return new TypeD();
+        return new Block([[0, 0], [1, 0], [1, 1], [1, 2]], 'blue');
     }
     if (randomNumber === 4) {
-        return new TypeE();
+        return new Block([[0, 2], [1, 0], [1, 1], [1, 2]], 'orange');
     }
     if (randomNumber === 5) {
-        return new TypeF();
+        return new Block([[0, 0], [0, 1], [1, 1], [1, 2]], 'red');
     }
     if (randomNumber === 6) {
-        return new TypeG();
+        return new Block([[0, 1], [0, 2], [1, 0], [1, 1]], 'green');
     }
 }
 
