@@ -2,14 +2,6 @@ import { Table } from './modules/table.js';
 import { Block, TypeA, TypeB, TypeC, TypeD, TypeE, TypeF, TypeG } from './modules/block.js';
 
 const table = new Table();
-const type = []
-type[0] = new TypeA();
-type[1] = new TypeB();
-type[2] = new TypeC();
-type[3] = new TypeD();
-type[4] = new TypeE();
-type[5] = new TypeF();
-type[6] = new TypeG();
 
 table.generate();
 
@@ -18,8 +10,29 @@ table.setData(randomBlock.getCoordinates(), randomBlock.getColor());
 table.display();
 
 function randomBlockGenerator() {
-    let randomBlock = Math.floor(Math.random() * 7);
-    return type[randomBlock];
+    let randomNumber = Math.floor(Math.random() * 7);
+    
+    if (randomNumber === 0) {
+        return new TypeA();
+    }
+    if (randomNumber === 1) {
+        return new TypeB();
+    }
+    if (randomNumber === 2) {
+        return new TypeC();
+    }
+    if (randomNumber === 3) {
+        return new TypeD();
+    }
+    if (randomNumber === 4) {
+        return new TypeE();
+    }
+    if (randomNumber === 5) {
+        return new TypeF();
+    }
+    if (randomNumber === 6) {
+        return new TypeG();
+    }
 }
 
 function keyInput() {
