@@ -2,9 +2,7 @@ import { Table } from './modules/table.js';
 import { Block, TypeA, TypeB, TypeC, TypeD, TypeE, TypeF, TypeG } from './modules/block.js';
 
 const table = new Table();
-
 const type = []
-
 type[0] = new TypeA();
 type[1] = new TypeB();
 type[2] = new TypeC();
@@ -14,10 +12,10 @@ type[5] = new TypeF();
 type[6] = new TypeG();
 
 table.generate();
+
 let randomBlock = randomBlockGenerator();
 table.setData(randomBlock.getCoordinates(), randomBlock.getColor());
-
-console.log(table.getData());
+table.display();
 
 function randomBlockGenerator() {
     let randomBlock = Math.floor(Math.random() * 7);

@@ -14,6 +14,17 @@ export class Table {
         });
     }
 
+    display() {
+        const tetris = document.querySelector('#tetris');
+        this.data.forEach((tr, i) => {
+            tr.forEach((td, j) => {
+                if (this.data[i][j]) {
+                    tetris.children[i].children[j].style.backgroundColor = this.data[i][j];
+                }
+            });
+        });
+    }
+
     generate() {
         const tetris = document.querySelector('#tetris');
         const fragment = document.createDocumentFragment();
@@ -27,7 +38,7 @@ export class Table {
             for (let i = 0; i < rowLength; i++) {
                 const td = document.createElement('td');
                 tr.appendChild(td);
-                array.push('-');
+                array.push('');
             }
         }
         tetris.appendChild(fragment);
