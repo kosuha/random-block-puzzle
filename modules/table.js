@@ -8,9 +8,9 @@ export class Table {
     }
 
     // 블록이 차지하는 좌표 값의 배열을 받아서 table data을 변경
-    setData(coordinates) {
+    setData(coordinates, color) {
         coordinates.forEach(element => {
-            this.data[element[0]][element[1]] = 1;
+            this.data[element[0]][element[1]] = color;
         });
     }
 
@@ -27,7 +27,7 @@ export class Table {
             for (let i = 0; i < rowLength; i++) {
                 const td = document.createElement('td');
                 tr.appendChild(td);
-                array.push(0);
+                array.push('-');
             }
         }
         tetris.appendChild(fragment);

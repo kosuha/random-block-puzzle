@@ -2,7 +2,7 @@ class Block {
     constructor() {
         this.coordinateX = 0;
         this.coordinateY = 3;
-        this.state = true;
+        this.state = true; // true 움직임, false 멈춤
     }
 
 }

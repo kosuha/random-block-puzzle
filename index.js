@@ -14,10 +14,15 @@ type[5] = new TypeF();
 type[6] = new TypeG();
 
 table.generate();
-
-table.setData(type[0].getCoordinates());
+let randomBlock = randomBlockGenerator();
+table.setData(randomBlock.getCoordinates(), randomBlock.getColor());
 
 console.log(table.getData());
+
+function randomBlockGenerator() {
+    let randomBlock = Math.floor(Math.random() * 7);
+    return type[randomBlock];
+}
 
 function keyInput() {
     window.addEventListener('keydown', (e) => {
