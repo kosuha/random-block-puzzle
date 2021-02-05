@@ -50,6 +50,17 @@ export class Table {
         });
     }
 
+    gameOverCondition() {
+        for (let i = 0; i < 2; i++) {
+            for (let j = 3; j < 7; j++) {
+                if (this.data[i][j].movable === false) {
+                    console.log('gameover');
+                    return true;
+                }
+            }
+        }
+    }
+
     generate() {
         const tetris = document.querySelector('#tetris');
         const fragment = document.createDocumentFragment();

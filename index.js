@@ -7,9 +7,8 @@ let randomBlock = randomBlockGenerator();
 table.display();
 
 keyInput();
-setTimeout(() => {
-    setInterval(interval, 100);
-}, 1000);
+
+let loop = setInterval(interval, 100);
 
 function interval() {
     if (randomBlock.getState() === false) {
@@ -19,8 +18,12 @@ function interval() {
     table.cleanData();
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     table.stopPosition(randomBlock);
+    
     table.display();
     randomBlock.gravity();
+    if (table.gameOverCondition()) {
+        clearInterval(loop);
+    }
 }
 
 function keyInput() {
