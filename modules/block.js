@@ -36,11 +36,12 @@ class Block {
         return this.state;
     }
 
+    setState(_state) {
+        this.state = _state;
+    }
+
     gravity() {
-        if (this.coordinates[0][0] < this.ground &&
-            this.coordinates[1][0] < this.ground &&
-            this.coordinates[2][0] < this.ground &&
-            this.coordinates[3][0] < this.ground) {
+        if (this.state) {
             this.coordinateX++;
         } else {
             this.state = false;

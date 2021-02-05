@@ -18,6 +18,7 @@ function interval() {
     }
     table.cleanData();
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    table.stopPosition(randomBlock);
     table.display();
     randomBlock.gravity();
 }

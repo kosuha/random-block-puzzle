@@ -1,6 +1,7 @@
 export class Table {
     constructor() {
         this.data = [];
+        this.ground = 19;
     }
 
     getData() {
@@ -11,7 +12,7 @@ export class Table {
     cleanData() {
         this.data.forEach((tr, i) => {
             tr.forEach((td, j) => {
-                if (this.data[i][j].hold === true) {
+                if (this.data[i][j].movable === true) {
                     this.data[i][j].color = 'white';
                 }
             });
@@ -20,10 +21,10 @@ export class Table {
     }
 
     // 블록이 차지하는 좌표 값의 배열을 받아서 table data을 변경
-    updateData(_coordinates, _color, _hold) {
+    updateData(_coordinates, _color, _movable) {
         _coordinates.forEach(element => {
             this.data[element[0]][element[1]].color = _color;
-            this.data[element[0]][element[1]].hold = _hold;
+            this.data[element[0]][element[1]].movable = _movable;
         });
     }
 
@@ -33,6 +34,19 @@ export class Table {
             tr.forEach((td, j) => {
                 tetris.children[i].children[j].style.backgroundColor = this.data[i][j].color;
             });
+        });
+    }
+
+    // 블록의 스톱포지션을 확인하고 블록 상태를 바꿈 
+    stopPosition(_block) {
+        _block.getCoordinates().forEach(element => {
+            if (element[0] < 19) {
+                if (this.data[element[0] + 1][element[1]].movable === false) {
+                    _block.setState(false);
+                }
+            } else {
+                _block.setState(false);
+            }
         });
     }
 
@@ -51,7 +65,7 @@ export class Table {
                 tr.appendChild(td);
                 let dataObject = {
                     color: '',
-                    hold: true
+                    movable: true
                 }
                 array.push(dataObject);
             }
