@@ -59,6 +59,7 @@ export class Table {
                 }
             }
         }
+        return false;
     }
 
     generate() {
