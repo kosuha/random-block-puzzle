@@ -11,14 +11,7 @@ class Block {
         ];
         this.state = true; // true 움직임, false 멈춤
         this.color = _color;
-    }
-
-    gravity() {
-        let ground = 19;
-        if (this.coordinates[0][0] < ground && this.coordinates[1][0] < ground && this.coordinates[2][0] < ground && this.coordinates[3][0] < ground) {
-            this.coordinateX++;
-            this.state = false;
-        }
+        this.ground = 19;
     }
 
     getCoordinates() {
@@ -33,6 +26,26 @@ class Block {
 
     getColor() {
         return this.color;
+    }
+
+    getGround() {
+        return this.ground;
+    }
+
+    getState() {
+        return this.state;
+    }
+
+    gravity() {
+        if (this.coordinates[0][0] < this.ground &&
+            this.coordinates[1][0] < this.ground &&
+            this.coordinates[2][0] < this.ground &&
+            this.coordinates[3][0] < this.ground) {
+            this.coordinateX++;
+        } else {
+            this.state = false;
+            console.log('false!');
+        }
     }
 }
 

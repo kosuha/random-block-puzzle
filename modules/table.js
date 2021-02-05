@@ -7,28 +7,31 @@ export class Table {
         return this.data;
     }
 
+    // 모든 칸을 'white'로 설정
     cleanData() {
         this.data.forEach((tr, i) => {
             tr.forEach((td, j) => {
-                this.data[i][j] = 'white';
+                if (this.data[i][j].hold === true) {
+                    this.data[i][j].color = 'white';
+                }
             });
         });
         console.log(this.data);
     }
 
     // 블록이 차지하는 좌표 값의 배열을 받아서 table data을 변경
-    updateData(coordinates, color) {
-        coordinates.forEach(element => {
-            this.data[element[0]][element[1]] = color;
+    updateData(_coordinates, _color, _hold) {
+        _coordinates.forEach(element => {
+            this.data[element[0]][element[1]].color = _color;
+            this.data[element[0]][element[1]].hold = _hold;
         });
-        // console.log(this.data);
     }
 
     display() {
         const tetris = document.querySelector('#tetris');
         this.data.forEach((tr, i) => {
             tr.forEach((td, j) => {
-                tetris.children[i].children[j].style.backgroundColor = this.data[i][j];
+                tetris.children[i].children[j].style.backgroundColor = this.data[i][j].color;
             });
         });
     }
@@ -46,7 +49,11 @@ export class Table {
             for (let i = 0; i < rowLength; i++) {
                 const td = document.createElement('td');
                 tr.appendChild(td);
-                array.push('');
+                let dataObject = {
+                    color: '',
+                    hold: true
+                }
+                array.push(dataObject);
             }
         }
         tetris.appendChild(fragment);
