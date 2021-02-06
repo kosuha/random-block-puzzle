@@ -17,13 +17,16 @@ function interval() {
     }
     table.cleanData();
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    
     table.stopPosition(randomBlock);
-
-    table.display();
     randomBlock.gravity();
+    table.display();
+    
     if (table.gameOverCondition()) {
         clearInterval(loop);
     }
+
+    
 }
 
 function keyInput() {
@@ -49,7 +52,7 @@ function keyInput() {
                 console.log('Space');
                 break;
             case 'ArrowUp':
-                console.log('ArrowUp');
+                randomBlock.rotate90();
                 break;
             case 'ArrowDown':
                 console.log('1000');
