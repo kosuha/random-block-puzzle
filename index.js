@@ -15,18 +15,17 @@ function interval() {
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
         randomBlock = randomBlockGenerator();
     }
-    table.cleanData();
-    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-    
     table.stopPosition(randomBlock);
-    randomBlock.gravity();
-    table.display();
-    
     if (table.gameOverCondition()) {
         clearInterval(loop);
     }
-
-    
+    table.cleanData();
+    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    randomBlock.gravity();
+    table.display();
+    if (table.gameOverCondition()) {
+        clearInterval(loop);
+    }
 }
 
 function keyInput() {
