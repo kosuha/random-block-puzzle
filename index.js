@@ -11,21 +11,17 @@ keyInput();
 let loop = setInterval(interval, 100);
 
 function interval() {
+    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    if (table.gameOverCondition()) {
+        clearInterval(loop);
+    }
     if (randomBlock.getState() === false) {
-        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
         randomBlock = randomBlockGenerator();
     }
-    table.stopPosition(randomBlock);
-    if (table.gameOverCondition()) {
-        clearInterval(loop);
-    }
-    table.cleanData();
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-    randomBlock.gravity();
     table.display();
-    if (table.gameOverCondition()) {
-        clearInterval(loop);
-    }
+    randomBlock.gravity();
+    table.stopPosition(randomBlock);
 }
 
 function keyInput() {
@@ -43,6 +39,9 @@ function keyInput() {
             default:
                 break;
         }
+        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+        table.stopPosition(randomBlock);
+        table.display();
     });
 
     window.addEventListener('keyup', (e) => {
@@ -52,6 +51,7 @@ function keyInput() {
                 break;
             case 'ArrowUp':
                 randomBlock.rotate90();
+
                 break;
             case 'ArrowDown':
                 console.log('1000');
@@ -59,6 +59,9 @@ function keyInput() {
             default:
                 break;
         }
+        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+        table.stopPosition(randomBlock);
+        table.display();
     });
 }
 
@@ -122,3 +125,5 @@ function randomBlockGenerator() {
         return new Block(structure, 'green');
     }
 }
+
+export { table };

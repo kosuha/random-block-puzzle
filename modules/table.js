@@ -21,6 +21,7 @@ export class Table {
 
     // 블록이 차지하는 좌표 값의 배열을 받아서 table data을 변경
     updateData(_coordinates, _color, _movable) {
+        this.cleanData();
         _coordinates.forEach(element => {
             this.data[element[0]][element[1]].color = _color;
             this.data[element[0]][element[1]].movable = _movable;
@@ -47,6 +48,15 @@ export class Table {
                 _block.setState(false);
             }
         });
+    }
+
+    rotatable(rotatedCoordinates) {
+        rotatedCoordinates.forEach(element => {
+            if (this.data[element[0]][element[1]].movable === false) {
+                return false;
+            }
+        });
+        return true;
     }
 
     gameOverCondition() {

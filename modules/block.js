@@ -1,3 +1,5 @@
+import { table } from '../index.js';
+
 class Block {
     constructor(_structure, _color) {
         this.structure = _structure;
@@ -82,7 +84,17 @@ class Block {
             }
         }
 
-        this.structure = rotated;
+        let rotatedPosition = this.structureToPosition(rotated);
+        let rotatedCoordinates = [
+            [this.coordinateX + rotatedPosition[0][0], this.coordinateY + rotatedPosition[0][1]],
+            [this.coordinateX + rotatedPosition[1][0], this.coordinateY + rotatedPosition[1][1]],
+            [this.coordinateX + rotatedPosition[2][0], this.coordinateY + rotatedPosition[2][1]],
+            [this.coordinateX + rotatedPosition[3][0], this.coordinateY + rotatedPosition[3][1]]
+        ];
+
+        if (table.rotatable(rotatedCoordinates) && this.state) {
+            this.structure = rotated;
+        }
     }
 }
 
