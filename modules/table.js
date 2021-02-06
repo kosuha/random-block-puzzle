@@ -66,14 +66,19 @@ export class Table {
         for (let i = 0; i < _coordinates.length; i++) {
             if (_coordinates[i][1] <= 0) {
                 return false;
+            } else if (this.data[_coordinates[i][0]][_coordinates[i][1] - 1].movable === false) {
+                return false;
             }
         }
+
         return true;
     }
 
     movableRight(_coordinates) {
         for (let i = 0; i < _coordinates.length; i++) {
             if (_coordinates[i][1] > 8) {
+                return false;
+            } else if (this.data[_coordinates[i][0]][_coordinates[i][1] + 1].movable === false) {
                 return false;
             }
         }
