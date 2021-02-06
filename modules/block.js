@@ -92,6 +92,7 @@ class Block {
             rotated[i] = new Array(m);
         }
 
+        // 2차원 배열 90도 회전 알고리즘
         for (let i = 0; i < rotated.length; i++) {
             for (let j = 0; j < rotated.length; j++) {
                 rotated[i][j] = this.structure[n - 1 - j][i];
@@ -106,8 +107,18 @@ class Block {
             [this.coordinateX + rotatedPosition[3][0], this.coordinateY + rotatedPosition[3][1]]
         ];
 
-        if (table.rotatable(rotatedCoordinates) && this.state) {
-            this.structure = rotated;
+        if (this.state) {
+            if (!table.rotatable(rotatedCoordinates)) {
+                for (let i = 0; i < rotatedCoordinates.length; i++) {
+                    rotatedCoordinates[i][0]--;
+                }
+                if (table.rotatable(rotatedCoordinates)) {
+                    this.coordinateX--;
+                    this.structure = rotated;
+                }
+            } else {
+                this.structure = rotated;
+            }
         }
     }
 }

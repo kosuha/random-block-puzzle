@@ -8,7 +8,7 @@ table.display();
 
 keyInput();
 
-let loop = setInterval(interval, 500);
+let loop = setInterval(interval, 1000);
 
 function interval() {
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
