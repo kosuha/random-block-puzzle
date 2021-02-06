@@ -2,6 +2,9 @@ export class Table {
     constructor() {
         this.data = [];
         this.ground = 22;
+        this.width = 10;
+        this.height = 20;
+        this.invisibleTop = 3;
     }
 
     getData() {
@@ -59,6 +62,14 @@ export class Table {
         return true;
     }
 
+    movableLeft() {
+        // TODO
+    }
+
+    movableRight() {
+        // TODO
+    }
+
     gameOverCondition() {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < this.data[i].length; j++) {
@@ -74,8 +85,8 @@ export class Table {
     generate() {
         const tetris = document.querySelector('#tetris');
         const fragment = document.createDocumentFragment();
-        const rowLength = 10;
-        const columnLength = 23;
+        const rowLength = this.width;
+        const columnLength = this.height + this.invisibleTop;
         for (let i = 0; i < columnLength; i++) {
             const tr = document.createElement('tr');
             let array = [];
@@ -91,9 +102,9 @@ export class Table {
                 array.push(dataObject);
             }
         }
-        
+
         tetris.appendChild(fragment);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < this.invisibleTop; i++) {
             tetris.children[i].style.display = 'none';
         }
     }

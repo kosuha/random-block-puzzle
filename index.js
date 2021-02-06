@@ -32,10 +32,10 @@ function keyInput() {
                 console.log('100');
                 break;
             case 'ArrowLeft':
-                console.log('ArrowLeft');
+                randomBlock.moveLeft();
                 break;
             case 'ArrowRight':
-                console.log('ArrowRight');
+                randomBlock.moveRight();
                 break;
             default:
                 break;

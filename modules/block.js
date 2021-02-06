@@ -42,9 +42,19 @@ class Block {
     gravity() {
         if (this.state) {
             this.coordinateX++;
-        } else {
-            this.state = false;
         }
+    }
+
+    moveLeft() {
+        // TODO
+    }
+
+    moveRight() {
+        // TODO
+    }
+
+    dropDown() {
+        // TODO
     }
 
     structureToPosition(structureArray) {
@@ -69,7 +79,7 @@ class Block {
     // 벽에 붙어서 쓰면 유효 범위로 이동
     // Table에게 블록 옆에 벽이 있는지 물어보기(좌, 우 각각)
     // 회전 시 블록의 위치에 블록이 있다면 회전 불가
-    rotate90(){
+    rotate90() {
         let n = this.structure.length;
         let m = this.structure[0].length;
 
@@ -77,10 +87,10 @@ class Block {
         for (let i = 0; i < rotated.length; i++) {
             rotated[i] = new Array(m);
         }
-        
+
         for (let i = 0; i < rotated.length; i++) {
             for (let j = 0; j < rotated.length; j++) {
-                rotated[i][j] = this.structure[n-1-j][i];
+                rotated[i][j] = this.structure[n - 1 - j][i];
             }
         }
 
