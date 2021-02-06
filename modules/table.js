@@ -17,7 +17,6 @@ export class Table {
                 }
             });
         });
-        console.log(this.data);
     }
 
     // 블록이 차지하는 좌표 값의 배열을 받아서 table data을 변경

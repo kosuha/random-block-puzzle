@@ -18,7 +18,7 @@ function interval() {
     table.cleanData();
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     table.stopPosition(randomBlock);
-    
+
     table.display();
     randomBlock.gravity();
     if (table.gameOverCondition()) {
@@ -64,24 +64,59 @@ function randomBlockGenerator() {
     let randomNumber = Math.floor(Math.random() * 7);
 
     if (randomNumber === 0) {
-        return new Block([[0, 1], [0, 2], [1, 1], [1, 2]], 'yellow');
+        let structure = [
+            [1, 1],
+            [1, 1]
+        ];
+        return new Block(structure, 'yellow');
     }
     if (randomNumber === 1) {
-        return new Block([[1, 0], [1, 1], [1, 2], [1, 3]], 'skyblue');
+        let structure = [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ];
+        return new Block(structure, 'skyblue');
     }
     if (randomNumber === 2) {
-        return new Block([[0, 1], [1, 0], [1, 1], [1, 2]], 'violet');
+        let structure = [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ];
+        return new Block(structure, 'violet');
     }
     if (randomNumber === 3) {
-        return new Block([[0, 0], [1, 0], [1, 1], [1, 2]], 'blue');
+        let structure = [
+            [1, 0, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ];
+        return new Block(structure, 'blue');
     }
     if (randomNumber === 4) {
-        return new Block([[0, 2], [1, 0], [1, 1], [1, 2]], 'orange');
+        let structure = [
+            [0, 0, 1],
+            [1, 1, 1],
+            [0, 0, 0]
+        ];
+        return new Block(structure, 'orange');
     }
     if (randomNumber === 5) {
-        return new Block([[0, 0], [0, 1], [1, 1], [1, 2]], 'red');
+        let structure = [
+            [1, 1, 0],
+            [0, 1, 1],
+            [0, 0, 0]
+        ];
+        return new Block(structure, 'red');
     }
     if (randomNumber === 6) {
-        return new Block([[0, 1], [0, 2], [1, 0], [1, 1]], 'green');
+        let structure = [
+            [0, 1, 1],
+            [1, 1, 0],
+            [0, 0, 0]
+        ];
+        return new Block(structure, 'green');
     }
 }
