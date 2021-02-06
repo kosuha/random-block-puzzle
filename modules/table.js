@@ -69,6 +69,24 @@ export class Table {
         return true;
     }
 
+    rotatableLeft(rotatedCoordinates) {
+        for (let i = 0; i < rotatedCoordinates.length; i++) {
+            if (rotatedCoordinates[i][1] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    rotatableRight(rotatedCoordinates) {
+        for (let i = 0; i < rotatedCoordinates.length; i++) {
+            if (rotatedCoordinates[i][1] > 9) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     movableLeft(_coordinates) {
         for (let i = 0; i < _coordinates.length; i++) {
             if (_coordinates[i][1] <= 0) {

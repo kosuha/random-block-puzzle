@@ -108,7 +108,29 @@ class Block {
         ];
 
         if (this.state) {
-            if (!table.rotatable(rotatedCoordinates)) {
+            if (!table.rotatableLeft(rotatedCoordinates)) {
+                for (let i = 0; i < rotatedCoordinates.length; i++) {
+                    rotatedCoordinates[i][1]++;
+                }
+                if (table.rotatable(rotatedCoordinates) &&
+                    table.rotatableLeft(rotatedCoordinates) &&
+                    table.rotatableRight(rotatedCoordinates)) {
+                    this.coordinateY++;
+                    this.structure = rotated;
+                }
+
+            } else if (!table.rotatableRight(rotatedCoordinates)) {
+                for (let i = 0; i < rotatedCoordinates.length; i++) {
+                    rotatedCoordinates[i][1]--;
+                }
+                if (table.rotatable(rotatedCoordinates) &&
+                    table.rotatableLeft(rotatedCoordinates) &&
+                    table.rotatableRight(rotatedCoordinates)) {
+                    this.coordinateY--;
+                    this.structure = rotated;
+                }
+
+            } else if (!table.rotatable(rotatedCoordinates)) {
                 for (let i = 0; i < rotatedCoordinates.length; i++) {
                     rotatedCoordinates[i][0]--;
                 }
