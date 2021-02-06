@@ -46,11 +46,15 @@ class Block {
     }
 
     moveLeft() {
-        // TODO
+        if (this.state && table.movableLeft(this.coordinates)) {
+            this.coordinateY--;
+        }
     }
 
     moveRight() {
-        // TODO
+        if (this.state && table.movableRight(this.coordinates)) {
+            this.coordinateY++;
+        }
     }
 
     dropDown() {

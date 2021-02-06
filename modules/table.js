@@ -62,12 +62,22 @@ export class Table {
         return true;
     }
 
-    movableLeft() {
-        // TODO
+    movableLeft(_coordinates) {
+        for (let i = 0; i < _coordinates.length; i++) {
+            if (_coordinates[i][1] <= 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    movableRight() {
-        // TODO
+    movableRight(_coordinates) {
+        for (let i = 0; i < _coordinates.length; i++) {
+            if (_coordinates[i][1] > 8) {
+                return false;
+            }
+        }
+        return true;
     }
 
     gameOverCondition() {
