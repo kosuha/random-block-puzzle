@@ -17,11 +17,12 @@ function interval() {
     }
     if (randomBlock.getState() === false) {
         randomBlock = randomBlockGenerator();
+        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     }
-    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-    table.display();
     randomBlock.gravity();
     table.stopPosition(randomBlock);
+    table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    table.display();
 }
 
 function keyInput() {
@@ -51,7 +52,6 @@ function keyInput() {
                 break;
             case 'ArrowUp':
                 randomBlock.rotate90();
-
                 break;
             case 'ArrowDown':
                 console.log('1000');

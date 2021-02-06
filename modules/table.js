@@ -1,7 +1,7 @@
 export class Table {
     constructor() {
         this.data = [];
-        this.ground = 19;
+        this.ground = 22;
     }
 
     getData() {
@@ -40,7 +40,7 @@ export class Table {
     // 블록의 스톱포지션을 확인하고 블록 상태를 바꿈 
     stopPosition(_block) {
         _block.getCoordinates().forEach(element => {
-            if (element[0] < 19) {
+            if (element[0] < this.ground) {
                 if (this.data[element[0] + 1][element[1]].movable === false) {
                     _block.setState(false);
                 }
@@ -60,8 +60,8 @@ export class Table {
     }
 
     gameOverCondition() {
-        for (let i = 0; i < 2; i++) {
-            for (let j = 3; j < 7; j++) {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < this.data[i].length; j++) {
                 if (this.data[i][j].movable === false) {
                     console.log('gameover');
                     return true;
@@ -75,7 +75,7 @@ export class Table {
         const tetris = document.querySelector('#tetris');
         const fragment = document.createDocumentFragment();
         const rowLength = 10;
-        const columnLength = 20;
+        const columnLength = 23;
         for (let i = 0; i < columnLength; i++) {
             const tr = document.createElement('tr');
             let array = [];
@@ -91,6 +91,10 @@ export class Table {
                 array.push(dataObject);
             }
         }
+        
         tetris.appendChild(fragment);
+        for (let i = 0; i < 3; i++) {
+            tetris.children[i].style.display = 'none';
+        }
     }
 }
