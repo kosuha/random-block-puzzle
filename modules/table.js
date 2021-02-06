@@ -54,11 +54,11 @@ export class Table {
     }
 
     rotatable(rotatedCoordinates) {
-        rotatedCoordinates.forEach(element => {
-            if (this.data[element[0]][element[1]].movable === false) {
+        for (let i = 0; i < rotatedCoordinates.length; i++) {
+            if (this.data[rotatedCoordinates[i][0]][rotatedCoordinates[i][1]].movable === false) {
                 return false;
             }
-        });
+        }
         return true;
     }
 

@@ -8,7 +8,7 @@ table.display();
 
 keyInput();
 
-let loop = setInterval(interval, 1000);
+let loop = setInterval(interval, 500);
 
 function interval() {
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
@@ -66,7 +66,7 @@ function keyInput() {
 }
 
 function randomBlockGenerator() {
-    let randomNumber = Math.floor(Math.random() * 7);
+    let randomNumber = 1;//Math.floor(Math.random() * 7);
 
     if (randomNumber === 0) {
         let structure = [
