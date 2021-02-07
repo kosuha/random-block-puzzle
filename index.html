@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>테트리스</title>
-    <style>
-        #tetris {
-            border-collapse: collapse;
-        }
-        #tetris td {
-            border: 1px solid black;
-            width: 20px;
-            height: 20px;
-        }
-    </style>
 </head>
 <body>
-    <table id="tetris"></table>
+    <div id="all">
+        <div id="game">
+            <table id="tetris"></table>
+        </div>
+        <div id="side">
+            <div id="info">
+                <div>Level 1</div>
+                <div>Score: 0</div>
+                <div>Next</div>
+                <table id="next"></table>
+            </div>
+            <div id="buttons">
+                <button>Pause</button>
+                <button>Start</button>
+            </div>
+        </div>
+        
+    </div>
 
     <script type="module" src="./index.js"></script>
 </body>
