@@ -1,6 +1,15 @@
 import { Table } from './modules/table.js';
 import { Block } from './modules/block.js';
 
+/*
+    TODO:
+        게임오버표시
+        다음에 나올 블럭 표시
+        시작, 일시정지, 재시작
+        레벨 설정, 점수 계산
+        반응형 CSS
+*/
+
 const table = new Table();
 table.generate();
 let randomBlock = randomBlockGenerator();
