@@ -8,10 +8,11 @@ table.display();
 
 keyInput();
 
-let loop = setInterval(interval, 1000);
+let loop = setInterval(interval, 500);
 
 function interval() {
     table.stopPosition(randomBlock);
+    
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     if (table.gameOverCondition()) {
         clearInterval(loop);
@@ -23,6 +24,7 @@ function interval() {
     randomBlock.gravity();
     
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+    table.lineClear();
     table.display();
 }
 

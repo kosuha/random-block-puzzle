@@ -61,7 +61,7 @@ export class Table {
             if (this.data[rotatedCoordinates[i][0]][rotatedCoordinates[i][1]].movable === false) {
                 return false;
             }
-            
+
         }
         return true;
     }
@@ -143,6 +143,35 @@ export class Table {
         tetris.appendChild(fragment);
         for (let i = 0; i < this.invisibleTop; i++) {
             tetris.children[i].style.display = 'none';
+        }
+    }
+
+    lineClear() {
+        let linesToClear = [];
+        for (let i = 0; i < this.data.length; i++) {
+            let movableCount = 0;
+            for (let j = 0; j < this.data[i].length; j++) {
+                if (this.data[i][j].movable === false) {
+                    movableCount++;
+                }
+            }
+            if (movableCount === 10) {
+                linesToClear.push(i);
+            }
+        }
+        
+        for (let i = 0; i < linesToClear.length; i++) {
+            this.data.splice(linesToClear[i], 1);
+            let array = [];
+            for (let i = 0; i < this.width; i++) {
+                let dataObject = {
+                    color: '',
+                    movable: true
+                }
+                array.push(dataObject);
+            }
+
+            this.data.unshift(array);
         }
     }
 }
