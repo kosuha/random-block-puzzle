@@ -11,6 +11,7 @@ keyInput();
 let loop = setInterval(interval, 1000);
 
 function interval() {
+    table.stopPosition(randomBlock);
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     if (table.gameOverCondition()) {
         clearInterval(loop);
@@ -20,7 +21,7 @@ function interval() {
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     }
     randomBlock.gravity();
-    table.stopPosition(randomBlock);
+    
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     table.display();
 }
@@ -41,7 +42,7 @@ function keyInput() {
                 break;
         }
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-        table.stopPosition(randomBlock);
+        // table.stopPosition(randomBlock);
         table.display();
     });
 
@@ -60,7 +61,7 @@ function keyInput() {
                 break;
         }
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-        table.stopPosition(randomBlock);
+        // table.stopPosition(randomBlock);
         table.display();
     });
 }

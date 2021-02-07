@@ -108,37 +108,40 @@ class Block {
         ];
 
         if (this.state) {
-            if (!table.rotatableLeft(rotatedCoordinates)) {
+            let correctionLeft = 0;
+            let correctionRight = 0;
+            let correctionGround = 0;
+
+            while (!table.rotatableLeft(rotatedCoordinates)) {
                 for (let i = 0; i < rotatedCoordinates.length; i++) {
                     rotatedCoordinates[i][1]++;
                 }
-                if (table.rotatable(rotatedCoordinates) &&
-                    table.rotatableLeft(rotatedCoordinates) &&
-                    table.rotatableRight(rotatedCoordinates)) {
-                    this.coordinateY++;
-                    this.structure = rotated;
-                }
+                correctionLeft++;
+            }
 
-            } else if (!table.rotatableRight(rotatedCoordinates)) {
+            while (!table.rotatableRight(rotatedCoordinates)) {
                 for (let i = 0; i < rotatedCoordinates.length; i++) {
                     rotatedCoordinates[i][1]--;
                 }
-                if (table.rotatable(rotatedCoordinates) &&
-                    table.rotatableLeft(rotatedCoordinates) &&
-                    table.rotatableRight(rotatedCoordinates)) {
-                    this.coordinateY--;
-                    this.structure = rotated;
-                }
+                correctionRight++;
+            }
 
-            } else if (!table.rotatable(rotatedCoordinates)) {
+            while (!table.rotatable(rotatedCoordinates)) {
                 for (let i = 0; i < rotatedCoordinates.length; i++) {
                     rotatedCoordinates[i][0]--;
                 }
-                if (table.rotatable(rotatedCoordinates)) {
-                    this.coordinateX--;
-                    this.structure = rotated;
+                correctionGround++;
+                if (correctionGround === 2) {
+                    break;
                 }
-            } else {
+            }
+
+            if (table.rotatable(rotatedCoordinates) &&
+                table.rotatableRight(rotatedCoordinates) &&
+                table.rotatableLeft(rotatedCoordinates)) {
+                this.coordinateY = this.coordinateY + correctionLeft;
+                this.coordinateY = this.coordinateY - correctionRight;
+                this.coordinateX = this.coordinateX - correctionGround;
                 this.structure = rotated;
             }
         }
