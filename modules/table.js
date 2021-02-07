@@ -53,9 +53,6 @@ export class Table {
         });
     }
 
-    // 벽에 붙어서 회전 시 옆으로 한 칸 보정
-    // 바닥에 붙어서 회전 시 위로 한 칸 보정
-    // 보정 불가 시 회전 불가
     rotatable(rotatedCoordinates) {
         for (let i = 0; i < rotatedCoordinates.length; i++) {
             if (rotatedCoordinates[i][0] > this.ground) {

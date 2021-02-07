@@ -30,7 +30,7 @@ function keyInput() {
     window.addEventListener('keydown', (e) => {
         switch (e.code) {
             case 'ArrowDown':
-                console.log('100');
+                randomBlock.moveDown();
                 break;
             case 'ArrowLeft':
                 randomBlock.moveLeft();
@@ -49,13 +49,10 @@ function keyInput() {
     window.addEventListener('keyup', (e) => {
         switch (e.code) {
             case 'Space':
-                console.log('Space');
+                randomBlock.dropDown();
                 break;
             case 'ArrowUp':
                 randomBlock.rotate90();
-                break;
-            case 'ArrowDown':
-                console.log('1000');
                 break;
             default:
                 break;
@@ -67,7 +64,7 @@ function keyInput() {
 }
 
 function randomBlockGenerator() {
-    let randomNumber = 1;//Math.floor(Math.random() * 7);
+    let randomNumber = Math.floor(Math.random() * 7);
 
     if (randomNumber === 0) {
         let structure = [

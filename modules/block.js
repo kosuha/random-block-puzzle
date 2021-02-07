@@ -57,8 +57,18 @@ class Block {
         }
     }
 
+    moveDown() {
+        if (this.state) {
+            this.coordinateX++;
+            table.stopPosition(this);
+        }
+    }
+
     dropDown() {
-        // TODO
+        while (this.state) {
+            this.coordinateX++;
+            table.stopPosition(this);
+        }
     }
 
     structureToPosition(structureArray) {
