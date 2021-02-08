@@ -1,4 +1,4 @@
-export class Table {
+class Table {
     constructor() {
         this.data = [];
         this.ground = 22;
@@ -227,3 +227,5 @@ export class Table {
         }
     }
 }
+
+export { Table };

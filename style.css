@@ -71,7 +71,15 @@ button {
 }
 
 #tetris {
-    
+    border-collapse: collapse;
+}
+
+#nextTitle {
+    padding-top: 2vh;
+}
+
+#next {
+    margin-left: 1vh;
     border-collapse: collapse;
 }
 

@@ -16,6 +16,10 @@ class Block {
         this.color = _color;
     }
 
+    getPosition() {
+        return this.position;
+    }
+
     getCoordinates() {
         this.position = this.structureToPosition(this.structure);
         this.coordinates = [

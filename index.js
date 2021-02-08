@@ -1,14 +1,12 @@
 import { Table } from './modules/table.js';
-import { Block } from './modules/block.js';
-
-/*
-    TODO:
-        다음에 나올 블럭 표시
-*/
+import { Next } from './modules/next.js';
 
 const table = new Table();
+const next = new Next();
+
+next.generateTable();
 table.generate();
-let randomBlock = randomBlockGenerator();
+let randomBlock;
 table.display();
 let loop;
 
@@ -19,11 +17,13 @@ let startState = false;
 
 startTag.addEventListener('click', () => {
     if (!startState) {
+
         const gameOverContainer = document.querySelector('#gameOverContainer');
         if (gameOverContainer) {
             gameOverContainer.parentNode.removeChild(gameOverContainer);
         }
         table.reset();
+        next.reset();
         table.display();
 
         const levelTag = document.querySelector('#level');
@@ -31,7 +31,8 @@ startTag.addEventListener('click', () => {
         levelTag.textContent = `Level ${table.level}`;
         scoreTag.textContent = `Score: ${table.score}`;
 
-        randomBlock = randomBlockGenerator();
+        randomBlock = next.addQueue();
+        
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
         loop = setInterval(interval, table.getSpeed());
         startState = true;
@@ -39,6 +40,7 @@ startTag.addEventListener('click', () => {
 });
 
 function interval() {
+
     table.stopPosition(randomBlock);
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     if (table.gameOverCondition()) {
@@ -50,7 +52,7 @@ function interval() {
         table.lineClear();
         clearInterval(loop);
         loop = setInterval(interval, table.getSpeed());
-        randomBlock = randomBlockGenerator();
+        randomBlock = next.addQueue();
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     }
     randomBlock.gravity();
@@ -116,65 +118,14 @@ function keyInput() {
     });
 }
 
-function randomBlockGenerator() {
-    let randomNumber = 0//Math.floor(Math.random() * 7);
-
-    if (randomNumber === 0) {
-        let structure = [
-            [1, 1],
-            [1, 1]
-        ];
-        return new Block(structure, 'yellow');
+function nextBlock() {
+    let nextList = [];
+    while (nextList.length < 3) {
+        nextList.push(randomBlockGenerator());
     }
-    if (randomNumber === 1) {
-        let structure = [
-            [0, 0, 0, 0],
-            [1, 1, 1, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ];
-        return new Block(structure, 'skyblue');
-    }
-    if (randomNumber === 2) {
-        let structure = [
-            [0, 1, 0],
-            [1, 1, 1],
-            [0, 0, 0]
-        ];
-        return new Block(structure, 'violet');
-    }
-    if (randomNumber === 3) {
-        let structure = [
-            [1, 0, 0],
-            [1, 1, 1],
-            [0, 0, 0]
-        ];
-        return new Block(structure, 'blue');
-    }
-    if (randomNumber === 4) {
-        let structure = [
-            [0, 0, 1],
-            [1, 1, 1],
-            [0, 0, 0]
-        ];
-        return new Block(structure, 'orange');
-    }
-    if (randomNumber === 5) {
-        let structure = [
-            [1, 1, 0],
-            [0, 1, 1],
-            [0, 0, 0]
-        ];
-        return new Block(structure, 'red');
-    }
-    if (randomNumber === 6) {
-        let structure = [
-            [0, 1, 1],
-            [1, 1, 0],
-            [0, 0, 0]
-        ];
-        return new Block(structure, 'green');
-    }
+    nextList.shift();
 }
+
+
 
 export { table };
