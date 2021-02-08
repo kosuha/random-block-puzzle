@@ -3,79 +3,121 @@ import { Block } from './modules/block.js';
 
 /*
     TODO:
-        게임오버표시
         다음에 나올 블럭 표시
-        시작, 일시정지, 재시작
-        레벨 설정, 점수 계산
-        반응형 CSS
 */
 
 const table = new Table();
 table.generate();
 let randomBlock = randomBlockGenerator();
 table.display();
+let loop;
 
 keyInput();
 
-let loop = setInterval(interval, 500);
+const startTag = document.querySelector('#start');
+let startState = false;
+
+startTag.addEventListener('click', () => {
+    if (!startState) {
+        const gameOverContainer = document.querySelector('#gameOverContainer');
+        if (gameOverContainer) {
+            gameOverContainer.parentNode.removeChild(gameOverContainer);
+        }
+        table.reset();
+        table.display();
+
+        const levelTag = document.querySelector('#level');
+        const scoreTag = document.querySelector('#score');
+        levelTag.textContent = `Level ${table.level}`;
+        scoreTag.textContent = `Score: ${table.score}`;
+
+        randomBlock = randomBlockGenerator();
+        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+        loop = setInterval(interval, table.getSpeed());
+        startState = true;
+    }
+});
 
 function interval() {
     table.stopPosition(randomBlock);
-    
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     if (table.gameOverCondition()) {
         clearInterval(loop);
+        startState = false;
+        return;
     }
     if (randomBlock.getState() === false) {
+        table.lineClear();
+        clearInterval(loop);
+        loop = setInterval(interval, table.getSpeed());
         randomBlock = randomBlockGenerator();
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     }
     randomBlock.gravity();
-    
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-    table.lineClear();
     table.display();
 }
 
+const pauseTag = document.querySelector('#pause');
+let pauseState = false;
+
+pauseTag.addEventListener('click', () => {
+    if (startState) {
+        if (!pauseState) {
+            clearInterval(loop);
+            pauseTag.textContent = 'Resume';
+            pauseState = true;
+        } else {
+            loop = setInterval(interval, table.getSpeed());
+            pauseTag.textContent = 'Pause';
+            pauseState = false;
+        }
+    }
+});
+
 function keyInput() {
     window.addEventListener('keydown', (e) => {
-        switch (e.code) {
-            case 'ArrowDown':
-                randomBlock.moveDown();
-                break;
-            case 'ArrowLeft':
-                randomBlock.moveLeft();
-                break;
-            case 'ArrowRight':
-                randomBlock.moveRight();
-                break;
-            default:
-                break;
+        if (startState && !pauseState) {
+            switch (e.code) {
+                case 'ArrowDown':
+                    randomBlock.moveDown();
+                    break;
+                case 'ArrowLeft':
+                    randomBlock.moveLeft();
+                    break;
+                case 'ArrowRight':
+                    randomBlock.moveRight();
+                    break;
+                default:
+                    break;
+            }
+            table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+            // table.stopPosition(randomBlock);
+            table.display();
         }
-        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-        // table.stopPosition(randomBlock);
-        table.display();
     });
 
     window.addEventListener('keyup', (e) => {
-        switch (e.code) {
-            case 'Space':
-                randomBlock.dropDown();
-                break;
-            case 'ArrowUp':
-                randomBlock.rotate90();
-                break;
-            default:
-                break;
+        if (startState && !pauseState) {
+            switch (e.code) {
+                case 'Space':
+                    randomBlock.dropDown();
+                    break;
+                case 'ArrowUp':
+                    randomBlock.rotate90();
+                    break;
+                default:
+                    break;
+            }
+            table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
+            // table.stopPosition(randomBlock);
+            table.display();
         }
-        table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-        // table.stopPosition(randomBlock);
-        table.display();
     });
 }
 
 function randomBlockGenerator() {
-    let randomNumber = Math.floor(Math.random() * 7);
+    let randomNumber = 0//Math.floor(Math.random() * 7);
 
     if (randomNumber === 0) {
         let structure = [

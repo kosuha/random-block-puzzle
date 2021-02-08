@@ -5,6 +5,11 @@ export class Table {
         this.width = 10;
         this.height = 20;
         this.invisibleTop = 3;
+        this.countLineCleared = 0;
+        this.level = 1;
+        this.score = 0;
+        this.speed = 1000;
+        this.speedUpSet = 0.8;
     }
 
     getData() {
@@ -29,6 +34,29 @@ export class Table {
             this.data[element[0]][element[1]].color = _color;
             this.data[element[0]][element[1]].movable = _movable;
         });
+    }
+
+    getSpeed() {
+        return this.speed;
+    }
+
+    setCountLineCleared(count) {
+        this.countLineCleared = this.countLineCleared + count;
+    }
+
+    setLevel() {
+        if ((this.countLineCleared / 10) >= this.level) {
+            this.speed = this.speed * this.speedUpSet;
+            this.level++;
+            const levelTag = document.querySelector('#level');
+            levelTag.textContent = `Level ${this.level}`;
+        }
+    }
+
+    setScore(combo) {
+        this.score = this.score + (this.level * combo);
+        const scoreTag = document.querySelector('#score');
+        scoreTag.textContent = `Score: ${this.score}`;
     }
 
     display() {
@@ -136,7 +164,7 @@ export class Table {
             let array = [];
             this.data.push(array);
             fragment.appendChild(tr);
-            for (let i = 0; i < rowLength; i++) {
+            for (let j = 0; j < rowLength; j++) {
                 const td = document.createElement('td');
                 tr.appendChild(td);
                 let dataObject = {
@@ -153,6 +181,20 @@ export class Table {
         }
     }
 
+    reset() {
+        this.countLineCleared = 0;
+        this.level = 1;
+        this.score = 0;
+        this.speed = 1000;
+
+        for (let i = 0; i < this.data.length; i++) {
+            for (let j = 0; j < this.data[i].length; j++) {
+                this.data[i][j].color = 'white';
+                this.data[i][j].movable = true;
+            }
+        }
+    }
+
     lineClear() {
         let linesToClear = [];
         for (let i = 0; i < this.data.length; i++) {
@@ -166,9 +208,8 @@ export class Table {
                 linesToClear.push(i);
             }
         }
-        
+
         for (let i = 0; i < linesToClear.length; i++) {
-            this.data.splice(linesToClear[i], 1);
             let array = [];
             for (let i = 0; i < this.width; i++) {
                 let dataObject = {
@@ -177,8 +218,12 @@ export class Table {
                 }
                 array.push(dataObject);
             }
-
+            this.data.splice(linesToClear[i], 1);
             this.data.unshift(array);
+            
+            this.setCountLineCleared(1);
+            this.setLevel();
+            this.setScore(linesToClear.length);
         }
     }
 }

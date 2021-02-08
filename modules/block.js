@@ -66,8 +66,11 @@ class Block {
 
     dropDown() {
         while (this.state) {
-            this.coordinateX++;
             table.stopPosition(this);
+            if (!this.state) {
+                break;
+            }
+            this.coordinateX++;
         }
     }
 
