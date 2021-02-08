@@ -220,7 +220,7 @@ class Table {
             }
             this.data.splice(linesToClear[i], 1);
             this.data.unshift(array);
-            
+
             this.setCountLineCleared(1);
             this.setLevel();
             this.setScore(linesToClear.length);

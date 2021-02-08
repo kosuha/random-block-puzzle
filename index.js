@@ -7,11 +7,8 @@ const next = new Next();
 next.generateTable();
 table.generate();
 let randomBlock;
-table.display();
 let loop;
-
 keyInput();
-
 const startTag = document.querySelector('#start');
 let startState = false;
 
@@ -24,7 +21,7 @@ startTag.addEventListener('click', () => {
         }
         table.reset();
         next.reset();
-        table.display();
+        
 
         const levelTag = document.querySelector('#level');
         const scoreTag = document.querySelector('#score');
@@ -32,7 +29,7 @@ startTag.addEventListener('click', () => {
         scoreTag.textContent = `Score: ${table.score}`;
 
         randomBlock = next.addQueue();
-        
+        table.display();
         table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
         loop = setInterval(interval, table.getSpeed());
         startState = true;
@@ -94,7 +91,6 @@ function keyInput() {
                     break;
             }
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-            // table.stopPosition(randomBlock);
             table.display();
         }
     });
@@ -112,7 +108,6 @@ function keyInput() {
                     break;
             }
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
-            // table.stopPosition(randomBlock);
             table.display();
         }
     });
@@ -125,7 +120,5 @@ function nextBlock() {
     }
     nextList.shift();
 }
-
-
 
 export { table };

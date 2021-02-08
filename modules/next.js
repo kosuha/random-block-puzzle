@@ -9,7 +9,7 @@ class Next {
         this.queue = [];
         this.positions = [[0, 0], [3, 0], [6, 0]];
     }
-    
+
     reset() {
         this.queue = [];
         for (let i = 0; i < this.data.length; i++) {
@@ -80,7 +80,6 @@ class Next {
                 this.data[x][y] = this.queue[i].getColor();
             }
         }
-        console.log(this.queue);
     }
 
     block() {
@@ -147,7 +146,6 @@ class Next {
             return new Block(structure, 'green');
         }
     }
-
 }
 
 export { Next };
