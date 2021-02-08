@@ -111,6 +111,13 @@ export class Table {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < this.data[i].length; j++) {
                 if (this.data[i][j].movable === false) {
+                    let gameOverTag = document.createElement('div');
+                    gameOverTag.id = 'gameOver';
+                    let tagContainer = document.createElement('div');
+                    tagContainer.id = 'gameOverContainer';
+                    tagContainer.appendChild(gameOverTag);
+                    game.appendChild(tagContainer);
+                    gameOverTag.textContent = 'GAME OVER';
                     console.log('gameover');
                     return true;
                 }
