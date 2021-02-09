@@ -63,8 +63,10 @@ class Block {
 
     moveDown() {
         if (this.state) {
-            this.coordinateX++;
             table.stopPosition(this);
+            if (this.state) {
+                this.coordinateX++;
+            }
         }
     }
 

@@ -146,7 +146,6 @@ class Table {
                     tagContainer.appendChild(gameOverTag);
                     game.appendChild(tagContainer);
                     gameOverTag.textContent = 'GAME OVER';
-                    console.log('gameover');
                     return true;
                 }
             }
