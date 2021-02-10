@@ -113,12 +113,4 @@ function keyInput() {
     });
 }
 
-function nextBlock() {
-    let nextList = [];
-    while (nextList.length < 3) {
-        nextList.push(randomBlockGenerator());
-    }
-    nextList.shift();
-}
-
 export { table };
