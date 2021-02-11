@@ -4,8 +4,6 @@
     font-size: 2vh;
     margin: 0;
     box-sizing: border-box;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
 }
 
 #popUp {
@@ -240,6 +238,8 @@ button {
     #buttonAndControl {
         display: flex;
         flex-direction: column;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
     }
     #popUp {
         position: absolute;
@@ -254,6 +254,7 @@ button {
         width: 90%;
         height: 5rem;
         margin: 1rem;
+        font-size: 2rem;
     }
     #back {
         display: inline;

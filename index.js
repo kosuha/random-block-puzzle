@@ -14,7 +14,6 @@ const game = document.querySelector('#game');
 if (isMobile) {
     ranking.style.display = 'inline';
     game.style.display = 'none';
-
 }
 
 const table = new Table();

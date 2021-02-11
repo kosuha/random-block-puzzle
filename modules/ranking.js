@@ -65,9 +65,12 @@ function uploadScore(_score, _level) {
     startButton.disabled = 'disabled';
     pauseButton.disabled = 'disabled';
 
+    let clickOneTime = false;
+
     if (isMobile) {
         enterButton.addEventListener('touchstart', () => {
-            if (input.value.length > 0) {
+            if (input.value.length > 0 && !clickOneTime) {
+                clickOneTime = true;
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
@@ -82,6 +85,7 @@ function uploadScore(_score, _level) {
                         rankingData();
                         startButton.disabled = false;
                         pauseButton.disabled = false;
+                        clickOneTime = false;
                     },
                     error: function () {
                         console.log('failed');
@@ -94,7 +98,8 @@ function uploadScore(_score, _level) {
         });
     } else {
         enterButton.addEventListener('click', () => {
-            if (input.value.length > 0) {
+            if (input.value.length > 0 && !clickOneTime) {
+                clickOneTime = true;
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
@@ -109,6 +114,7 @@ function uploadScore(_score, _level) {
                         rankingData();
                         startButton.disabled = false;
                         pauseButton.disabled = false;
+                        clickOneTime = false;
                     },
                     error: function () {
                         console.log('failed');
