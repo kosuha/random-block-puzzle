@@ -104,7 +104,7 @@ function interval() {
 const pauseTag = document.querySelector('#pause');
 let pauseState = false;
 
-if (isMobile()) {
+if (isMobile) {
     pauseTag.addEventListener('touchstart', () => {
         if (startState) {
             if (!pauseState) {
