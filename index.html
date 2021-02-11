@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>테트리스</title>
 </head>
 <body>
     <div id="all">
+        <div id="ranking">
+            <div id="rankingTitle">Rankings</div>
+            <table id="rankingTable"></table>
+        </div>
         <div id="game">
             <table id="tetris"></table>
         </div>
@@ -23,7 +28,6 @@
                 <button id="start">Start</button>
             </div>
         </div>
-        
     </div>
 
     <script type="module" src="./index.js"></script>

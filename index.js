@@ -1,5 +1,11 @@
 import { Table } from './modules/table.js';
 import { Next } from './modules/next.js';
+import { generateRankingTable, rankingData, uploadScore } from './modules/ranking.js';
+
+device_check();
+
+generateRankingTable();
+rankingData();
 
 const table = new Table();
 const next = new Next();
@@ -21,7 +27,6 @@ startTag.addEventListener('click', () => {
         }
         table.reset();
         next.reset();
-        
 
         const levelTag = document.querySelector('#level');
         const scoreTag = document.querySelector('#score');
@@ -37,12 +42,14 @@ startTag.addEventListener('click', () => {
 });
 
 function interval() {
-
     table.stopPosition(randomBlock);
     table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
     if (table.gameOverCondition()) {
         clearInterval(loop);
         startState = false;
+        setTimeout(() => {
+            uploadScore(table.getScore(), table.getLevel());
+        }, 1000);
         return;
     }
     if (randomBlock.getState() === false) {
@@ -112,5 +119,38 @@ function keyInput() {
         }
     });
 }
+
+// 확대 방지
+function preventScaleUp() {
+    document.documentElement.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, false);
+
+    var lastTouchEnd = 0;
+
+    document.documentElement.addEventListener('touchend', function (event) {
+        let now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        } lastTouchEnd = now;
+    }, false);
+}
+
+// 접속 기기 체크
+function device_check() {
+    let pc_device = "win16|win32|win64|mac|macintel";
+    let this_device = navigator.platform;
+    if (this_device) {
+        if (pc_device.indexOf(navigator.platform.toLowerCase()) < 0) {
+            window.location.href = './m.index.html';
+        } else {
+            console.log('PC');
+        }
+    }
+}
+
+
 
 export { table };

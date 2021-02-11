@@ -16,6 +16,14 @@ class Table {
         return this.data;
     }
 
+    getLevel() {
+        return this.level;
+    }
+
+    getScore() {
+        return this.score;
+    }
+
     // 모든 칸을 'white'로 설정
     cleanData() {
         this.data.forEach((tr, i) => {
