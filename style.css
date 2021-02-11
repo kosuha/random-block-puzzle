@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 * {
     font-family: 'Press Start 2P', cursive;
     font-size: 2vh;
     margin: 0;
     box-sizing: border-box;
 }
+
 #popUp {
     position: absolute;
     width: 45vh;
@@ -16,7 +16,7 @@
     box-shadow: 5px 5px 5px;
 }
 
-#popUp input{
+#popUp input {
     width: 35vh;
     height: 3vh;
     margin: 1vh;
@@ -28,7 +28,7 @@
     justify-content: flex-end;
 }
 
-#popUp button{
+#popUp button {
     width: 10vh;
     height: 3.5vh;
     font-size: 1vh;
@@ -45,7 +45,7 @@
     text-align: center;
 }
 
-#rankingTable td{
+#rankingTable td {
     padding: 1.5vh;
 }
 
@@ -138,4 +138,137 @@ button {
     border-radius: 0.5vh;
     width: 4vh;
     height: 4vh;
+}
+
+#arrows, #drop {
+    display: none;
+}
+
+@media ( max-width: 769px) {
+    #ranking {
+        display: none;
+    }
+
+    * {
+        font-size: 1vh;
+    }
+    #all {
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #game {
+        margin: 3%;
+    }
+    #side {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    #info {
+        height: auto;
+        margin-left: 0;
+    }
+    #info div {
+        margin: 1rem;
+    }
+    #buttons {
+        height: 3rem;
+    }
+    button {
+        background-color: antiquewhite;
+        width: 13rem;
+        height: 5rem;
+    }
+    #tetris td {
+        width: 3rem;
+        height: 3rem;
+    }
+    #next td {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    #arrows, #drop {
+        display: inline;
+        
+    }
+
+    #arrows {
+        margin-left: 5rem;
+    }
+
+    #arrowTable td {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    #up {
+        border: 2px solid black;
+        border-radius: 1rem;
+        border-top-left-radius: 5rem;
+        border-top-right-radius: 5rem;
+    }
+
+    #down {
+        border: 2px solid black;
+        border-radius: 1rem;
+        border-bottom-left-radius: 5rem;
+        border-bottom-right-radius: 5rem;
+    }
+
+    #left {
+        border: 2px solid black;
+        border-radius: 1rem;
+        border-bottom-left-radius: 5rem;
+        border-top-left-radius: 5rem;
+    }
+
+    #right {
+        border: 2px solid black;
+        border-radius: 1rem;
+        border-bottom-right-radius: 5rem;
+        border-top-right-radius: 5rem;
+    }
+
+    #drop {
+        width: 10rem;
+        height: 10rem;
+        border: 2px solid black;
+        margin-top: 10rem;
+        border-radius: 2rem;
+        padding: 1rem;
+    }
+
+    #control {
+        display: flex;
+        flex-direction: row;
+        /* border: 1px solid black; */
+        margin-top: 5rem;
+    }
+
+    #buttonAndControl {
+        
+        display: flex;
+        flex-direction: column;
+    }
+
+    #popUp {
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        top: 35%;
+        background-color: aliceblue;
+        padding: 4rem;
+        box-shadow: 5px 5px 5px;
+    }
+
+    #popUp input {
+        width: 90%;
+        height: 5rem;
+        margin: 1rem;
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>테트리스</title>
 </head>
+
 <body>
     <div id="all">
         <div id="ranking">
@@ -23,13 +25,39 @@
                 <div id="nextTitle">Next</div>
                 <table id="next"></table>
             </div>
-            <div id="buttons">
-                <button id="pause">Pause</button>
-                <button id="start">Start</button>
+            <div id="buttonAndControl">
+                <div id="buttons">
+                    <button id="pause">Pause</button>
+                    <button id="start">Start</button>
+                </div>
+                <div id="control">
+                    <div id="drop">drop</div>
+                    <div id="arrows">
+                        <table id="arrowTable">
+                            <tr>
+                                <td></td>
+                                <td id="up"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td id="left"></td>
+                                <td></td>
+                                <td id="right"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td id="down"></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
 
     <script type="module" src="./index.js"></script>
 </body>
+
 </html>

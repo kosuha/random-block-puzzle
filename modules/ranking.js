@@ -1,3 +1,5 @@
+import { isMobile } from '../index.js';
+
 function generateRankingTable() {
     const rankingTable = document.querySelector('#rankingTable');
     const fragment = document.createDocumentFragment();
@@ -63,38 +65,75 @@ function uploadScore(_score, _level) {
     startButton.disabled = 'disabled';
     pauseButton.disabled = 'disabled';
 
-    enterButton.addEventListener('click', () => {
-        if (input.value.length > 0) {
-            $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: './data/score-upload-process.php',
-                data: {
-                    name: input.value,
-                    score: _score,
-                    level: _level
-                },
-                success: function () {
-                    popUp.parentNode.removeChild(popUp);
-                    rankingData();
-                    startButton.disabled = false;
-                    pauseButton.disabled = false;
-                },
-                error: function () {
-                    console.log('failed');
-                }
-            })
-        } else {
-            alert("이름이 비어있어요!");
-        }
+    if (isMobile) {
+        enterButton.addEventListener('touchstart', () => {
+            if (input.value.length > 0) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: './data/score-upload-process.php',
+                    data: {
+                        name: input.value,
+                        score: _score,
+                        level: _level
+                    },
+                    success: function () {
+                        popUp.parentNode.removeChild(popUp);
+                        rankingData();
+                        startButton.disabled = false;
+                        pauseButton.disabled = false;
+                    },
+                    error: function () {
+                        console.log('failed');
+                    }
+                })
+            } else {
+                alert("이름이 비어있어요!");
+            }
 
-    });
+        });
+    } else {
+        enterButton.addEventListener('click', () => {
+            if (input.value.length > 0) {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: './data/score-upload-process.php',
+                    data: {
+                        name: input.value,
+                        score: _score,
+                        level: _level
+                    },
+                    success: function () {
+                        popUp.parentNode.removeChild(popUp);
+                        rankingData();
+                        startButton.disabled = false;
+                        pauseButton.disabled = false;
+                    },
+                    error: function () {
+                        console.log('failed');
+                    }
+                })
+            } else {
+                alert("이름이 비어있어요!");
+            }
 
-    exitButton.addEventListener('click', () => {
-        popUp.parentNode.removeChild(popUp);
-        startButton.disabled = false;
-        pauseButton.disabled = false;
-    });
+        });
+    }
+
+    if (isMobile) {
+        exitButton.addEventListener('touchstart', () => {
+            popUp.parentNode.removeChild(popUp);
+            startButton.disabled = false;
+            pauseButton.disabled = false;
+        });
+    } else {
+        exitButton.addEventListener('click', () => {
+            popUp.parentNode.removeChild(popUp);
+            startButton.disabled = false;
+            pauseButton.disabled = false;
+        });
+    }
 
     // 왜 안될까...
     async function sendAjax(url, _data) {
