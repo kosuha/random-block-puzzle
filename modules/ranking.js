@@ -17,12 +17,12 @@ function generateRankingTable() {
 }
 
 function rankingData() {
-    let data = { 'data': 'data' };
-    data = JSON.stringify(data);
+    // let data = { 'data': 'data' };
+    // data = JSON.stringify(data);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', './data/ranking-process.php');
     xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send(data);
+    xhr.send();
     xhr.addEventListener('load', function () {
         let result = JSON.parse(xhr.responseText);
         const rankingTable = document.querySelector('#rankingTable');

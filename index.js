@@ -8,9 +8,13 @@ preventScaleUp();
 generateRankingTable();
 rankingData();
 
+const ranking = document.querySelector('#ranking');
+const game = document.querySelector('#game');
+
 if (isMobile) {
-    const ranking = document.querySelector('#ranking');
-    ranking.style.display = 'none';
+    ranking.style.display = 'inline';
+    game.style.display = 'none';
+
 }
 
 const table = new Table();
@@ -32,19 +36,19 @@ let startState = false;
 if (isMobile) {
     startTag.addEventListener('touchstart', () => {
         if (!startState) {
-    
             const gameOverContainer = document.querySelector('#gameOverContainer');
             if (gameOverContainer) {
                 gameOverContainer.parentNode.removeChild(gameOverContainer);
             }
             table.reset();
             next.reset();
-    
+            ranking.style.display = 'none';
+            game.style.display = 'inline';
             const levelTag = document.querySelector('#level');
             const scoreTag = document.querySelector('#score');
             levelTag.textContent = `Level ${table.level}`;
             scoreTag.textContent = `Score: ${table.score}`;
-    
+
             randomBlock = next.addQueue();
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
@@ -55,19 +59,19 @@ if (isMobile) {
 } else {
     startTag.addEventListener('click', () => {
         if (!startState) {
-    
+
             const gameOverContainer = document.querySelector('#gameOverContainer');
             if (gameOverContainer) {
                 gameOverContainer.parentNode.removeChild(gameOverContainer);
             }
             table.reset();
             next.reset();
-    
+
             const levelTag = document.querySelector('#level');
             const scoreTag = document.querySelector('#score');
             levelTag.textContent = `Level ${table.level}`;
             scoreTag.textContent = `Score: ${table.score}`;
-    
+
             randomBlock = next.addQueue();
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
@@ -102,6 +106,9 @@ function interval() {
 }
 
 const pauseTag = document.querySelector('#pause');
+if (isMobile) {
+    pauseTag.textContent = 'Rank';
+}
 let pauseState = false;
 
 if (isMobile) {
@@ -109,13 +116,21 @@ if (isMobile) {
         if (startState) {
             if (!pauseState) {
                 clearInterval(loop);
+                ranking.style.display = 'inline';
+                game.style.display = 'none';
                 pauseTag.textContent = 'Resume';
                 pauseState = true;
             } else {
                 loop = setInterval(interval, table.getSpeed());
-                pauseTag.textContent = 'Pause';
+                ranking.style.display = 'none';
+                game.style.display = 'inline';
+                pauseTag.textContent = 'Rank';
                 pauseState = false;
             }
+        }
+
+        if (!startState) {
+            ranking.style.display = 'inline';
         }
     });
 } else {

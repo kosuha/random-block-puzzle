@@ -4,6 +4,8 @@
     font-size: 2vh;
     margin: 0;
     box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 #popUp {
@@ -140,15 +142,11 @@ button {
     height: 4vh;
 }
 
-#arrows, #drop {
+#arrows, #drop, #back {
     display: none;
 }
 
 @media ( max-width: 769px) {
-    #ranking {
-        display: none;
-    }
-
     * {
         font-size: 1vh;
     }
@@ -191,49 +189,40 @@ button {
         width: 1.5rem;
         height: 1.5rem;
     }
-
     #arrows, #drop {
         display: inline;
-        
     }
-
     #arrows {
         margin-left: 5rem;
     }
-
     #arrowTable td {
         width: 6rem;
         height: 6rem;
     }
-
     #up {
         border: 2px solid black;
         border-radius: 1rem;
         border-top-left-radius: 5rem;
         border-top-right-radius: 5rem;
     }
-
     #down {
         border: 2px solid black;
         border-radius: 1rem;
         border-bottom-left-radius: 5rem;
         border-bottom-right-radius: 5rem;
     }
-
     #left {
         border: 2px solid black;
         border-radius: 1rem;
         border-bottom-left-radius: 5rem;
         border-top-left-radius: 5rem;
     }
-
     #right {
         border: 2px solid black;
         border-radius: 1rem;
         border-bottom-right-radius: 5rem;
         border-top-right-radius: 5rem;
     }
-
     #drop {
         width: 10rem;
         height: 10rem;
@@ -242,20 +231,16 @@ button {
         border-radius: 2rem;
         padding: 1rem;
     }
-
     #control {
         display: flex;
         flex-direction: row;
         /* border: 1px solid black; */
         margin-top: 5rem;
     }
-
     #buttonAndControl {
-        
         display: flex;
         flex-direction: column;
     }
-
     #popUp {
         position: absolute;
         width: 90%;
@@ -265,10 +250,16 @@ button {
         padding: 4rem;
         box-shadow: 5px 5px 5px;
     }
-
     #popUp input {
         width: 90%;
         height: 5rem;
         margin: 1rem;
+    }
+    #back {
+        display: inline;
+    }
+    #ranking {
+        display: none;
+        padding: 5rem;
     }
 }
