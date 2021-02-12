@@ -1,4 +1,4 @@
-import { isMobile } from '../index.js';
+import { isMobile, shareScore } from '../index.js';
 
 function generateRankingTable() {
     const rankingTable = document.querySelector('#rankingTable');
@@ -81,7 +81,14 @@ function uploadScore(_score, _level) {
                         level: _level
                     },
                     success: function () {
-                        popUp.parentNode.removeChild(popUp);
+                        popUpTitle.textContent = '친구들에게 내 점수를 자랑하세요!';
+                        input.style.display = 'none';
+                        enterButton.style.display = 'none';
+                        const shareScoreButton = document.createElement('button');
+                        shareScoreButton.id = 'shareScoreButton';
+                        shareScoreButton.textContent = '자랑하기';
+                        buttons.appendChild(shareScoreButton);
+                        shareScore(input.value, _score);
                         rankingData();
                         startButton.disabled = false;
                         pauseButton.disabled = false;
@@ -110,7 +117,14 @@ function uploadScore(_score, _level) {
                         level: _level
                     },
                     success: function () {
-                        popUp.parentNode.removeChild(popUp);
+                        popUpTitle.textContent = '친구들에게 내 점수를 자랑하세요!';
+                        input.style.display = 'none';
+                        enterButton.style.display = 'none';
+                        const shareScoreButton = document.createElement('button');
+                        shareScoreButton.id = 'shareScoreButton';
+                        shareScoreButton.textContent = '자랑하기';
+                        buttons.appendChild(shareScoreButton);
+                        shareScore(input.value, _score);
                         rankingData();
                         startButton.disabled = false;
                         pauseButton.disabled = false;

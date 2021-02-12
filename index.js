@@ -263,7 +263,7 @@ function device_check() {
 
 // 카카오톡으로 공유하기
 Kakao.init('');
-console.log(Kakao.isInitialized());
+
 document.querySelector('#kakao-link-btn').addEventListener('click', () => {
     Kakao.Link.sendDefault({
         objectType: 'feed',
@@ -280,4 +280,22 @@ document.querySelector('#kakao-link-btn').addEventListener('click', () => {
     });
 });
 
-export { table, isMobile };
+function shareScore(inputName, inputScore) {
+    document.querySelector('#shareScoreButton').addEventListener('click', () => {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: `${inputName}님이 ${inputScore}점 을 달성!`,
+                description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
+                imageUrl:
+                    'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
+                link: {
+                    webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/index.html',
+                    androidExecParams: 'test'
+                }
+            }
+        });
+    });
+}
+
+export { table, isMobile, shareScore };
