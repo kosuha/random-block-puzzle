@@ -1,5 +1,6 @@
 import { Table } from './modules/table.js';
 import { Next } from './modules/next.js';
+import { log } from './modules/log.js';
 import { generateRankingTable, rankingData, uploadScore } from './modules/ranking.js';
 
 let isMobile = device_check();
@@ -52,6 +53,7 @@ if (isMobile) {
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
             loop = setInterval(interval, table.getSpeed());
+            log(isMobile);
             startState = true;
         }
     });
@@ -75,6 +77,7 @@ if (isMobile) {
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
             loop = setInterval(interval, table.getSpeed());
+            log(isMobile);
             startState = true;
         }
     });
@@ -105,9 +108,6 @@ function interval() {
 }
 
 const pauseTag = document.querySelector('#pause');
-if (isMobile) {
-    pauseTag.textContent = 'Rank';
-}
 let pauseState = false;
 
 if (isMobile) {
@@ -123,7 +123,7 @@ if (isMobile) {
                 loop = setInterval(interval, table.getSpeed());
                 ranking.style.display = 'none';
                 game.style.display = 'inline';
-                pauseTag.textContent = 'Rank';
+                pauseTag.textContent = 'Pause';
                 pauseState = false;
             }
         }
@@ -260,5 +260,24 @@ function device_check() {
         }
     }
 }
+
+// 카카오톡으로 공유하기
+Kakao.init('');
+console.log(Kakao.isInitialized());
+document.querySelector('#kakao-link-btn').addEventListener('click', () => {
+    Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '랜덤블록퍼즐',
+            description: '같이 게임해요!!',
+            imageUrl:
+                'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
+            link: {
+                webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/index.html',
+                androidExecParams: 'test'
+            }
+        }
+    });
+});
 
 export { table, isMobile };

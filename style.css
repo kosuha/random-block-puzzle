@@ -104,7 +104,7 @@ body {
 }
 
 button {
-    background-color: antiquewhite;
+    border-radius: 3rem;
     width: 20vh;
     height: 6vh;
 }
@@ -172,10 +172,9 @@ button {
         margin: 1rem;
     }
     #buttons {
-        height: 3rem;
+        height: 6rem;
     }
     button {
-        background-color: antiquewhite;
         width: 13rem;
         height: 5rem;
     }
@@ -191,11 +190,14 @@ button {
         display: inline;
     }
     #arrows {
-        margin-left: 5rem;
+        margin-left: 7rem;
+    }
+    #drop {
+        margin-left: 2rem;
     }
     #arrowTable td {
-        width: 6rem;
-        height: 6rem;
+        width: 7rem;
+        height: 7rem;
     }
     #up {
         border: 2px solid black;
@@ -233,7 +235,7 @@ button {
         display: flex;
         flex-direction: row;
         /* border: 1px solid black; */
-        margin-top: 5rem;
+        margin-top: 3rem;
     }
     #buttonAndControl {
         display: flex;
