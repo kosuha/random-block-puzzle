@@ -48,8 +48,10 @@ if (isMobile) {
             game.style.display = 'inline';
             const levelTag = document.querySelector('#level');
             const scoreTag = document.querySelector('#score');
-            levelTag.textContent = `Level ${table.level}`;
-            scoreTag.textContent = `Score: ${table.score}`;
+            const linesTag = document.querySelector('#lines');
+            levelTag.textContent = `Level 1`;
+            scoreTag.textContent = `Score: 0`;
+            linesTag.textContent = `Lines: 0`;
 
             randomBlock = next.addQueue();
             table.display();
@@ -72,8 +74,10 @@ if (isMobile) {
 
             const levelTag = document.querySelector('#level');
             const scoreTag = document.querySelector('#score');
-            levelTag.textContent = `Level ${table.level}`;
-            scoreTag.textContent = `Score: ${table.score}`;
+            const linesTag = document.querySelector('#lines');
+            levelTag.textContent = `Level 1`;
+            scoreTag.textContent = `Score: 0`;
+            linesTag.textContent = `Lines: 0`;
 
             randomBlock = next.addQueue();
             table.display();

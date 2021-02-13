@@ -212,6 +212,7 @@ class Table {
         this.countLineCleared = 0;
         this.level = 1;
         this.score = 0;
+        this.lines = 0;
         this.speed = 1000;
 
         for (let i = 0; i < this.data.length; i++) {
