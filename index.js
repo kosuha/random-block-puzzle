@@ -286,7 +286,7 @@ function touchInput() {
 function help() {
     const helpButton = document.querySelector('#helpButton');
     const help = document.querySelector('#help');
-    let helpState = true;
+    let helpState = false;
     if (!isMobile) {
         helpButton.addEventListener('click', () => {
             if (!helpState) {
