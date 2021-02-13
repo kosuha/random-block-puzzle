@@ -9,6 +9,7 @@ preventScaleUp();
 
 generateRankingTable();
 rankingData();
+help();
 
 const ranking = document.querySelector('#ranking');
 const game = document.querySelector('#game');
@@ -279,6 +280,40 @@ function touchInput() {
             table.display();
         }
     });
+}
+
+// 도움말
+function help() {
+    const helpButton = document.querySelector('#helpButton');
+    const help = document.querySelector('#help');
+    let helpState = true;
+    if (!isMobile) {
+        helpButton.addEventListener('click', () => {
+            if (!helpState) {
+                help.style.display = 'inline';
+                helpButton.textContent = 'X';
+                helpState = true;
+            } else {
+                help.style.display = 'none';
+                helpButton.textContent = '?';
+                helpState = false;
+            }
+        });
+    }
+
+    if (isMobile) {
+        helpButton.addEventListener('touchstart', () => {
+            if (!helpState) {
+                help.style.display = 'inline';
+                helpButton.textContent = 'X';
+                helpState = true;
+            } else {
+                help.style.display = 'none';
+                helpButton.textContent = '?';
+                helpState = false;
+            }
+        });
+    }
 }
 
 // 확대 방지

@@ -66,6 +66,7 @@ body {
 #game {
     border: 2px solid rgba(0, 0, 0, 1);
     position: relative;
+    z-index: -1;
 }
 
 #gameOverContainer {
@@ -114,8 +115,31 @@ button {
     margin: 10px;
 }
 
+#helpButton {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    border-radius: 5rem;
+    margin: 2vh;
+    width: 6vh;
+    height:6vh;
+}
+
+#help {
+    line-height: 150%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    padding: 1vh;
+    margin: 1vh;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* display: none; */
+}
+
 #tetris {
     border-collapse: collapse;
+    background-color: white;
 }
 
 #nextTitle {
@@ -176,9 +200,11 @@ button {
         height: 6rem;
     }
     button {
+        border: 2px solid black;
         width: 13rem;
         height: 5rem;
     }
+    
     #tetris td {
         width: 3rem;
         height: 3rem;
@@ -235,7 +261,6 @@ button {
     #control {
         display: flex;
         flex-direction: row;
-        /* border: 1px solid black; */
         margin-top: 3rem;
     }
     #buttonAndControl {
@@ -265,5 +290,24 @@ button {
     #ranking {
         display: none;
         padding: 5rem;
+    }
+
+    #helpButton {
+        border-radius: 5rem;
+        margin: 2vh;
+        width: 4vh;
+        height: 4vh;
+    }
+
+    #help {
+        line-height: 150%;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        padding: 1vh;
+        margin: 1vh;
+        border: 2px solid black;
+        background-color: rgba(255, 255, 255, 0.8);
+        /* display: none; */
     }
 }

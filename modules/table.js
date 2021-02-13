@@ -8,6 +8,7 @@ class Table {
         this.countLineCleared = 0;
         this.level = 1;
         this.score = 0;
+        this.lines = 0;
         this.speed = 1000;
         this.speedUpSet = 0.8;
     }
@@ -22,6 +23,10 @@ class Table {
 
     getScore() {
         return this.score;
+    }
+
+    getLines() {
+        return this.lines;
     }
 
     // 모든 칸을 'white'로 설정
@@ -65,6 +70,12 @@ class Table {
         this.score = this.score + (this.level * combo);
         const scoreTag = document.querySelector('#score');
         scoreTag.textContent = `Score: ${this.score}`;
+    }
+
+    setLines(clearlines) {
+        this.lines = this.lines + clearlines;
+        const linesTag = document.querySelector('#lines');
+        linesTag.textContent = `Lines: ${this.lines}`;
     }
 
     display() {
@@ -241,6 +252,7 @@ class Table {
             this.setLevel();
             this.setScore(linesToClear.length);
         }
+        this.setLines(linesToClear.length);
     }
 }
 
