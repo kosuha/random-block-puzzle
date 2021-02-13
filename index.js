@@ -2,6 +2,7 @@ import { Table } from './modules/table.js';
 import { Next } from './modules/next.js';
 import { log } from './modules/log.js';
 import { generateRankingTable, rankingData, uploadScore } from './modules/ranking.js';
+import { kakaoInit } from './modules/kakaoInit.js';
 
 let isMobile = device_check();
 preventScaleUp();
@@ -111,6 +112,7 @@ const pauseTag = document.querySelector('#pause');
 let pauseState = false;
 
 if (isMobile) {
+    let pauseOnce = false;
     pauseTag.addEventListener('touchstart', () => {
         if (startState) {
             if (!pauseState) {
@@ -119,12 +121,35 @@ if (isMobile) {
                 game.style.display = 'none';
                 pauseTag.textContent = 'Resume';
                 pauseState = true;
+                table.displayBlack();
+                next.displayBlack();
             } else {
-                loop = setInterval(interval, table.getSpeed());
-                ranking.style.display = 'none';
-                game.style.display = 'inline';
-                pauseTag.textContent = 'Pause';
-                pauseState = false;
+                if (!pauseOnce) {
+                    pauseOnce = true;
+                    pauseTag.textContent = '5';
+                    setTimeout(() => {
+                        pauseTag.textContent = '4';
+                    }, 1000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '3';
+                    }, 2000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '2';
+                    }, 3000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '1';
+                    }, 4000);
+                    setTimeout(() => {
+                        loop = setInterval(interval, table.getSpeed());
+                        ranking.style.display = 'none';
+                        game.style.display = 'inline';
+                        pauseTag.textContent = 'Pause';
+                        table.display();
+                        next.display();
+                        pauseState = false;
+                        pauseOnce = false;
+                    }, 5000);
+                }
             }
         }
 
@@ -132,17 +157,43 @@ if (isMobile) {
             ranking.style.display = 'inline';
         }
     });
-} else {
+}
+
+if (!isMobile) {
+    let pauseOnce = false;
     pauseTag.addEventListener('click', () => {
         if (startState) {
             if (!pauseState) {
                 clearInterval(loop);
                 pauseTag.textContent = 'Resume';
                 pauseState = true;
+                table.displayBlack();
+                next.displayBlack();
             } else {
-                loop = setInterval(interval, table.getSpeed());
-                pauseTag.textContent = 'Pause';
-                pauseState = false;
+                if (!pauseOnce) {
+                    pauseOnce = true;
+                    pauseTag.textContent = '5';
+                    setTimeout(() => {
+                        pauseTag.textContent = '4';
+                    }, 1000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '3';
+                    }, 2000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '2';
+                    }, 3000);
+                    setTimeout(() => {
+                        pauseTag.textContent = '1';
+                    }, 4000);
+                    setTimeout(() => {
+                        loop = setInterval(interval, table.getSpeed());
+                        pauseTag.textContent = 'Pause';
+                        table.display();
+                        next.display();
+                        pauseState = false;
+                        pauseOnce = false;
+                    }, 5000);
+                }
             }
         }
     });
@@ -262,7 +313,7 @@ function device_check() {
 }
 
 // 카카오톡으로 공유하기
-Kakao.init('');
+kakaoInit();
 
 document.querySelector('#kakao-link-btn').addEventListener('click', () => {
     Kakao.Link.sendDefault({

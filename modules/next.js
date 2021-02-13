@@ -63,6 +63,15 @@ class Next {
         });
     }
 
+    displayBlack() {
+        const next = document.querySelector('#next');
+        this.data.forEach((tr, i) => {
+            tr.forEach((td, j) => {
+                next.children[i].children[j].style.backgroundColor = 'black';
+            });
+        });
+    }
+
     cleanData() {
         this.data.forEach((tr, i) => {
             tr.forEach((td, j) => {

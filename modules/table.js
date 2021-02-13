@@ -76,6 +76,15 @@ class Table {
         });
     }
 
+    displayBlack() {
+        const tetris = document.querySelector('#tetris');
+        this.data.forEach((tr, i) => {
+            tr.forEach((td, j) => {
+                tetris.children[i].children[j].style.backgroundColor = 'black';
+            });
+        });
+    }
+
     // 블록의 스톱포지션을 확인하고 블록 상태를 바꿈 
     stopPosition(_block) {
         _block.getCoordinates().forEach(element => {
