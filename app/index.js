@@ -363,7 +363,7 @@ document.querySelector('#kakao-link-btn').addEventListener('click', () => {
             imageUrl:
                 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
             link: {
-                webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/index.html',
+                webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
                 androidExecParams: 'test'
             }
         }
@@ -380,7 +380,7 @@ function shareScore(inputName, inputScore) {
                 imageUrl:
                     'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
                 link: {
-                    webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/index.html',
+                    webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
                     androidExecParams: 'test'
                 }
             }

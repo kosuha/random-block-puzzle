@@ -1,21 +1,18 @@
-function log(isMobile) {
-    let data = 0;
-    if (isMobile) {
-        data = 1;
-    }
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        url: './data/log-process.php',
-        data: {
-            mobile: data
+async function log(isMobile) {
+    let data = {
+        isMobile: isMobile
+    };
+
+    let response = await fetch('/log-process', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
         },
-        success: function () {
-        },
-        error: function () {
-            console.log('failed');
-        }
-    })
+        body: JSON.stringify(data)
+    });
+
+    let result = await response.json();
+    console.log(result, typeof(result));
 }
 
 export { log };

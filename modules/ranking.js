@@ -16,22 +16,23 @@ function generateRankingTable() {
     rankingTable.appendChild(fragment);
 }
 
-function rankingData() {
-    // let data = { 'data': 'data' };
-    // data = JSON.stringify(data);
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', './data/ranking-process.php');
-    xhr.setRequestHeader('Content-Type', "application/json");
-    xhr.send();
-    xhr.addEventListener('load', function () {
-        let result = JSON.parse(xhr.responseText);
-        const rankingTable = document.querySelector('#rankingTable');
-        for (let i = 0; i < result.name.length; i++) {
-            rankingTable.children[i].children[0].textContent = i + 1;
-            rankingTable.children[i].children[1].textContent = result.name[i];
-            rankingTable.children[i].children[2].textContent = result.score[i];
+async function rankingData() {
+    let response = await fetch('/ranking-process', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
         }
     });
+
+    let result = await response.json();
+    console.log(result, typeof (result));
+
+    const rankingTable = document.querySelector('#rankingTable');
+    for (let i = 0; i < result.length; i++) {
+        rankingTable.children[i].children[0].textContent = i + 1;
+        rankingTable.children[i].children[1].textContent = result[i].name;
+        rankingTable.children[i].children[2].textContent = result[i].score;
+    }
 }
 
 function uploadScore(_score, _level) {
@@ -71,74 +72,49 @@ function uploadScore(_score, _level) {
         enterButton.addEventListener('touchstart', () => {
             if (input.value.length > 0 && !clickOneTime) {
                 clickOneTime = true;
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: './data/score-upload-process.php',
-                    data: {
-                        name: input.value,
-                        score: _score,
-                        level: _level
-                    },
-                    success: function () {
-                        popUpTitle.textContent = '친구들에게 내 점수를 자랑하세요!';
-                        input.style.display = 'none';
-                        enterButton.style.display = 'none';
-                        const shareScoreButton = document.createElement('button');
-                        shareScoreButton.id = 'shareScoreButton';
-                        shareScoreButton.textContent = '자랑하기';
-                        buttons.appendChild(shareScoreButton);
-                        shareScore(input.value, _score);
-                        rankingData();
-                        startButton.disabled = false;
-                        pauseButton.disabled = false;
-                        clickOneTime = false;
-                    },
-                    error: function () {
-                        console.log('failed');
-                    }
-                })
+                post();
             } else {
                 alert("이름이 비어있어요!");
             }
-
         });
     } else {
         enterButton.addEventListener('click', () => {
             if (input.value.length > 0 && !clickOneTime) {
                 clickOneTime = true;
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    url: './data/score-upload-process.php',
-                    data: {
-                        name: input.value,
-                        score: _score,
-                        level: _level
-                    },
-                    success: function () {
-                        popUpTitle.textContent = '친구들에게 내 점수를 자랑하세요!';
-                        input.style.display = 'none';
-                        enterButton.style.display = 'none';
-                        const shareScoreButton = document.createElement('button');
-                        shareScoreButton.id = 'shareScoreButton';
-                        shareScoreButton.textContent = '자랑하기';
-                        buttons.appendChild(shareScoreButton);
-                        shareScore(input.value, _score);
-                        rankingData();
-                        startButton.disabled = false;
-                        pauseButton.disabled = false;
-                        clickOneTime = false;
-                    },
-                    error: function () {
-                        console.log('failed');
-                    }
-                })
+                post();
             } else {
                 alert("이름이 비어있어요!");
             }
-
         });
+    }
+
+    async function post() {
+        let data = {
+            name: input.value,
+            score: _score,
+            level: _level
+        };
+
+        let response = await fetch('/score-upload-process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        });
+
+        popUpTitle.textContent = '친구들에게 내 점수를 자랑하세요!';
+        input.style.display = 'none';
+        enterButton.style.display = 'none';
+        const shareScoreButton = document.createElement('button');
+        shareScoreButton.id = 'shareScoreButton';
+        shareScoreButton.textContent = '자랑하기';
+        buttons.appendChild(shareScoreButton);
+        shareScore(input.value, _score);
+        rankingData();
+        startButton.disabled = false;
+        pauseButton.disabled = false;
+        clickOneTime = false;
     }
 
     if (isMobile) {
