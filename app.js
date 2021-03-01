@@ -6,7 +6,7 @@ const connection = require('./lib/conn.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (request, response) => {
+app.get('/rbp', (request, response) => {
     response.sendFile(__dirname + '/app/index.html');
 });
 
