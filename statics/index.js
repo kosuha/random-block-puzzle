@@ -351,6 +351,26 @@ function device_check() {
     }
 }
 
+// 사용자 정보 가져오기
+getUserData();
+async function getUserData() {
+    let response = await fetch('/user-data-process', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+
+    let result = await response.json();
+    console.log(result, typeof(result));
+
+    const myName = document.querySelector('#myName');
+    const myImage = document.querySelector('#myImage');
+
+    myName.textContent = result.nickName;
+    myImage.src = result.profileImageURL;
+}
+
 // 카카오톡으로 공유하기
 kakaoInit();
 

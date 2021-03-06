@@ -9,13 +9,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosuha/random-block-puzzle.git"
+  },
   "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosuha/tetris/issues"
+  },
+  "homepage": "https://github.com/kosuha/tetris#readme",
   "dependencies": {
-    "@mysql/xdevapi": "8.0.23",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
+    "express-mysql-session": "^2.1.5",
+    "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
-    "sanitize-html": "^1.18.2"
+    "passport": "^0.4.1",
+    "passport-kakao": "^1.0.1",
+    "pm2": "^4.5.4"
   }
 }

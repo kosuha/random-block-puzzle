@@ -1,5 +1,5 @@
 lib/conn.js
-modules/kakaoInit.js
+statics/modules/kakaoInit.js
 
 # Logs
 logs

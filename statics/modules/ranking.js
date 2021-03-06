@@ -25,7 +25,7 @@ async function rankingData() {
     });
 
     let result = await response.json();
-    console.log(result, typeof (result));
+    // console.log(result, typeof (result));
 
     const rankingTable = document.querySelector('#rankingTable');
     for (let i = 0; i < result.length; i++) {
