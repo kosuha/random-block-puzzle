@@ -185,7 +185,7 @@ button {
     font-size: 2rem;
 }
 
-@media ( max-width: 769px) {
+@media ( max-width: 900px) {
     * {
         font-size: 1vh;
     }
