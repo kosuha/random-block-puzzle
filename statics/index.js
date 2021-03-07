@@ -1,6 +1,5 @@
 import { Table } from './modules/table.js';
 import { Next } from './modules/next.js';
-import { log } from './modules/log.js';
 import { generateRankingTable, rankingData, uploadScore } from './modules/ranking.js';
 import { kakaoInit } from './modules/kakaoInit.js';
 
@@ -57,7 +56,6 @@ if (isMobile) {
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
             loop = setInterval(interval, table.getSpeed());
-            log(isMobile);
             startState = true;
         }
     });
@@ -83,7 +81,6 @@ if (isMobile) {
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
             loop = setInterval(interval, table.getSpeed());
-            log(isMobile);
             startState = true;
         }
     });

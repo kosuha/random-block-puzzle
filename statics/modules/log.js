@@ -1,4 +1,4 @@
-async function log(isMobile) {
+async function log(isMobile, profile, score) {
     let data = {
         isMobile: isMobile
     };

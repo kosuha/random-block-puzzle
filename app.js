@@ -49,7 +49,7 @@ passport.use(new kakaoStrategy({
     callbackURL: kakaoCredentials.web.callback_URL
 },
     (accessToken, refreshToken, profile, done) => {
-        
+
         const id = profile.id;
         const userName = profile.username;
         const nickName = profile.displayName;
@@ -78,7 +78,7 @@ app.get('/auth/kakao/callback',
 );
 
 app.get('/', authenticateUser, (request, response) => {
-    console.log('user: ',request.session.passport.user);
+    console.log('user: ', request.session.passport.user);
 
     response.sendFile(__dirname + '/app/index.html');
 });
@@ -91,16 +91,6 @@ app.post('/user-data-process', (request, response) => {
     response.json(request.session.passport.user);
 });
 
-app.post('/log-process', (request, response) => {
-    connection.query(`INSERT INTO logs(mobile) VALUES(?)`, [request.body.isMobile],
-        (error, rows, fields) => {
-            if (error) {
-                throw error;
-            }
-            response.end();
-        });
-});
-
 app.post('/ranking-process', (request, response) => {
     connection.query('SELECT * FROM ranking ORDER BY score DESC LIMIT 10', function (error, rows, fields) {
         response.json(rows);
@@ -108,13 +98,42 @@ app.post('/ranking-process', (request, response) => {
 });
 
 app.post('/score-upload-process', (request, response) => {
-    connection.query(`INSERT INTO ranking(name,score,level) VALUES(?, ?, ?)`, [request.body.name, request.body.score, request.body.level],
+    const userData = request.session.passport.user;
+    connection.query(
+        `INSERT INTO logs(id_kakao, nickname_kakao, username_kakao, profile_image, score, level, mobile) VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [userData.id, userData.userName, userData.nickName, userData.profileImageURL, request.body.score, request.body.level, request.body.isMobile],
         (error, rows, fields) => {
             if (error) {
                 throw error;
             }
-            response.end();
         });
+
+    connection.query(`SELECT * FROM ranking WHERE id_kakao = ${userData.id}`,
+     (error, rows, fields) => {
+        if (error) {
+            throw error;
+        }
+        if (Object.keys(rows).length === 0) {
+            connection.query(
+                `INSERT INTO ranking(id_kakao, nickname_kakao, username_kakao, profile_image, score, level) VALUES(?, ?, ?, ?, ?, ?)`,
+                [userData.id, userData.userName, userData.nickName, userData.profileImageURL, request.body.score, request.body.level],
+                (error, rows, fields) => {
+                    if (error) {
+                        throw error;
+                    }
+                });
+        } else {
+            if(rows[0].score < request.body.score){
+                connection.query(
+                    `UPDATE ranking SET score = '${request.body.score}', level = '${request.body.level}', nickname_kakao = '${userData.nickName}' WHERE id_kakao = '${userData.id}'`,
+                    (error, rows, fields) => {
+                        if (error) {
+                            throw error;
+                        }
+                    });
+            }
+        }
+    });
 });
 
 http.listen(80, () => {
