@@ -198,16 +198,17 @@ button {
     border-collapse: collapse;
 }
 
-#rankingTable>:nth-child(1) {
-    background-color: gold;
+#rankingTable>:nth-child(1)>:nth-child(1) {
+    -webkit-text-stroke: 1px rgb(223, 195, 39);
 }
 
-#rankingTable>:nth-child(2) {
-    background-color: silver;
+#rankingTable>:nth-child(2)>:nth-child(1) {
+    -webkit-text-stroke: 1px rgb(150, 150, 150);
+    
 }
 
-#rankingTable>:nth-child(3) {
-    background-color: rgb(92, 75, 58);
+#rankingTable>:nth-child(3)>:nth-child(1) {
+    -webkit-text-stroke: 1px rgb(189, 116, 56);
 }
 
 @media ( max-width: 900px) {
