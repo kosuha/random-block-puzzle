@@ -398,7 +398,7 @@ function shareScore() {
         Kakao.Link.sendDefault({
             objectType: 'feed',
             content: {
-                title: `${myName}님의 최고점수 ${highScore}점!`,
+                title: `${myName.textContent}님의 최고점수 ${highScore.textContent}점!`,
                 description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
                 imageUrl:
                     'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/img/share_img.jpg',
