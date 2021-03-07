@@ -1,7 +1,0 @@
-{
-    "web": {
-        "client_id": "",
-        "client_secret": "",
-        "callback_URL": "http://localhost/auth/kakao/callback"
-    }
-}
