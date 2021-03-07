@@ -1,7 +1,7 @@
 {
     "web": {
-        "client_id": "cbb86dcbbb67670ed24f88417d6f2858",
-        "client_secret": "HB0atPZONjaDpwZexJiiwcWjIyZ8XybR",
+        "client_id": "",
+        "client_secret": "",
         "callback_URL": "http://localhost/auth/kakao/callback"
     }
 }

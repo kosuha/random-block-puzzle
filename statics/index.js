@@ -350,6 +350,7 @@ function device_check() {
 
 // 사용자 정보 가져오기
 getUserData();
+
 async function getUserData() {
     let response = await fetch('/user-data-process', {
         method: 'POST',
@@ -363,39 +364,43 @@ async function getUserData() {
 
     const myName = document.querySelector('#myName');
     const myImage = document.querySelector('#myImage');
+    const highScore = document.querySelector('#highScore');
 
-    myName.textContent = result.nickName;
-    myImage.src = result.profileImageURL;
+    myName.textContent = result.userData.nickName;
+    myImage.src = result.userData.profileImageURL;
+    highScore.textContent = `Highest: ${result.highest}`;
 }
 
 // 카카오톡으로 공유하기
 kakaoInit();
 
-document.querySelector('#kakao-link-btn').addEventListener('click', () => {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '랜덤블록퍼즐',
-            description: '같이 게임해요!!',
-            imageUrl:
-                'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
-            link: {
-                webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
-                androidExecParams: 'test'
-            }
-        }
-    });
-});
+// document.querySelector('#kakao-link-btn').addEventListener('click', () => {
+//     Kakao.Link.sendDefault({
+//         objectType: 'feed',
+//         content: {
+//             title: '랜덤블록퍼즐',
+//             description: '같이 게임해요!!',
+//             imageUrl:
+//                 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
+//             link: {
+//                 webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
+//                 androidExecParams: 'test'
+//             }
+//         }
+//     });
+// });
 
-function shareScore(inputName, inputScore) {
-    document.querySelector('#shareScoreButton').addEventListener('click', () => {
+function shareScore() {
+    const myName = document.querySelector('#myName');
+    const highScore = document.querySelector('#highScore');
+    document.querySelector('#kakao-link-btn').addEventListener('click' || 'touchstart', () => {
         Kakao.Link.sendDefault({
             objectType: 'feed',
             content: {
-                title: `${inputName}님이 ${inputScore}점 을 달성!`,
+                title: `${myName}님의 최고점수 ${highScore}점!`,
                 description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
                 imageUrl:
-                    'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
+                    'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/img/share_img.jpg',
                 link: {
                     webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
                     androidExecParams: 'test'

@@ -88,13 +88,26 @@ app.get('/signin', (request, response) => {
 });
 
 app.post('/user-data-process', (request, response) => {
-    response.json(request.session.passport.user);
+    const userData = request.session.passport.user;
+    
+    connection.query(`SELECT * FROM ranking WHERE id_kakao = ${userData.id}`,
+        (error, rows, fields) => {
+            if (error) {
+                throw error;
+            }
+            if (Object.keys(rows).length === 0) {
+                response.json({userData: userData, highest: 0});
+            } else {
+                response.json({userData: userData, highest: rows[0].score});
+            }
+        });
 });
 
 app.post('/ranking-process', (request, response) => {
-    connection.query('SELECT * FROM ranking ORDER BY score DESC LIMIT 10', function (error, rows, fields) {
-        response.json(rows);
-    });
+    connection.query('SELECT * FROM ranking ORDER BY score DESC LIMIT 10',
+        (error, rows, fields) => {
+            response.json(rows);
+        });
 });
 
 app.post('/score-upload-process', (request, response) => {
@@ -109,31 +122,31 @@ app.post('/score-upload-process', (request, response) => {
         });
 
     connection.query(`SELECT * FROM ranking WHERE id_kakao = ${userData.id}`,
-     (error, rows, fields) => {
-        if (error) {
-            throw error;
-        }
-        if (Object.keys(rows).length === 0) {
-            connection.query(
-                `INSERT INTO ranking(id_kakao, nickname_kakao, username_kakao, profile_image, score, level) VALUES(?, ?, ?, ?, ?, ?)`,
-                [userData.id, userData.userName, userData.nickName, userData.profileImageURL, request.body.score, request.body.level],
-                (error, rows, fields) => {
-                    if (error) {
-                        throw error;
-                    }
-                });
-        } else {
-            if(rows[0].score < request.body.score){
+        (error, rows, fields) => {
+            if (error) {
+                throw error;
+            }
+            if (Object.keys(rows).length === 0) {
                 connection.query(
-                    `UPDATE ranking SET score = '${request.body.score}', level = '${request.body.level}', nickname_kakao = '${userData.nickName}' WHERE id_kakao = '${userData.id}'`,
+                    `INSERT INTO ranking(id_kakao, nickname_kakao, username_kakao, profile_image, score, level) VALUES(?, ?, ?, ?, ?, ?)`,
+                    [userData.id, userData.userName, userData.nickName, userData.profileImageURL, request.body.score, request.body.level],
                     (error, rows, fields) => {
                         if (error) {
                             throw error;
                         }
                     });
+            } else {
+                if (rows[0].score < request.body.score) {
+                    connection.query(
+                        `UPDATE ranking SET score = '${request.body.score}', level = '${request.body.level}', nickname_kakao = '${userData.nickName}' WHERE id_kakao = '${userData.id}'`,
+                        (error, rows, fields) => {
+                            if (error) {
+                                throw error;
+                            }
+                        });
+                }
             }
-        }
-    });
+        });
 });
 
 http.listen(80, () => {

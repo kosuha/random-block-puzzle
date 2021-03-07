@@ -1,4 +1,7 @@
+const defaultSpeed = 500;
+
 class Table {
+
     constructor() {
         this.data = [];
         this.ground = 22;
@@ -9,8 +12,8 @@ class Table {
         this.level = 1;
         this.score = 0;
         this.lines = 0;
-        this.speed = 1000;
-        this.speedUpSet = 0.8;
+        this.speed = defaultSpeed;
+        this.speedUpSet = 0.9;
     }
 
     getData() {
@@ -213,7 +216,7 @@ class Table {
         this.level = 1;
         this.score = 0;
         this.lines = 0;
-        this.speed = 1000;
+        this.speed = defaultSpeed;
 
         for (let i = 0; i < this.data.length; i++) {
             for (let j = 0; j < this.data[i].length; j++) {

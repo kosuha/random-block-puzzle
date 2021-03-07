@@ -211,7 +211,11 @@ button {
         margin-left: 0;
     }
     #info div {
-        margin: 1rem;
+        margin: 0.5rem;
+    }
+    
+    #nextTitle {
+        padding-top: 1vh;
     }
     #buttons {
         height: 6rem;

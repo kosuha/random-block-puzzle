@@ -1,7 +1,7 @@
 {
     "data": {
-    "secret": "kosuhakkoosudu",
-    "resave": false,
-    "saveUninitialized": true
+        "secret": "",
+        "resave": false,
+        "saveUninitialized": true
     }
 }
