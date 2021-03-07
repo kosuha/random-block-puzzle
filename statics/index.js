@@ -390,6 +390,7 @@ kakaoInit();
 //     });
 // });
 
+shareScore();
 function shareScore() {
     const myName = document.querySelector('#myName');
     const highScore = document.querySelector('#highScore');

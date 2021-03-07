@@ -76,11 +76,13 @@ body {
     background-color: rgba(100, 100, 100, 0.5);
     top: 0;
     left: 0;
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
 #gameOver {
+    width: 100%;
     font-size: 5vh;
     top: 0;
     left: 0;
