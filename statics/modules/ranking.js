@@ -7,7 +7,7 @@ function generateRankingTable() {
     for (let i = 0; i < 10; i++) {
         const tr = document.createElement('tr');
         fragment.appendChild(tr);
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < 4; j++) {
             const td = document.createElement('td');
             tr.appendChild(td);
         }
@@ -30,8 +30,14 @@ async function rankingData() {
     const rankingTable = document.querySelector('#rankingTable');
     for (let i = 0; i < result.length; i++) {
         rankingTable.children[i].children[0].textContent = i + 1;
-        rankingTable.children[i].children[1].textContent = result[i].nickname_kakao;
-        rankingTable.children[i].children[2].textContent = result[i].score;
+        
+        const imageTag = document.createElement('img');
+        imageTag.id = 'rankingProfileImage';
+        rankingTable.children[i].children[1].appendChild(imageTag);
+        imageTag.src = result[i].profile_image;
+        
+        rankingTable.children[i].children[2].textContent = result[i].nickname_kakao;
+        rankingTable.children[i].children[3].textContent = result[i].score;
     }
 }
 

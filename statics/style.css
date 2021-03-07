@@ -183,8 +183,31 @@ button {
     border: 2px solid black;
 }
 
+#rankingProfileImage {
+    border-radius: 10vh;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid black;
+}
+
 #myName {
     font-size: 2rem;
+}
+
+#rankingTable {
+    border-collapse: collapse;
+}
+
+#rankingTable>:nth-child(1) {
+    background-color: gold;
+}
+
+#rankingTable>:nth-child(2) {
+    background-color: silver;
+}
+
+#rankingTable>:nth-child(3) {
+    background-color: rgb(92, 75, 58);
 }
 
 @media ( max-width: 900px) {
