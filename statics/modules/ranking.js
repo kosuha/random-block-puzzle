@@ -33,7 +33,9 @@ async function rankingData() {
         
         const imageTag = document.createElement('img');
         imageTag.id = 'rankingProfileImage';
-        rankingTable.children[i].children[1].removeChild(rankingTable.children[i].children[0]);
+        if (rankingTable.children[i].children[1].children[0]) {
+            rankingTable.children[i].children[1].removeChild(rankingTable.children[i].children[1].children[0]);
+        }
         rankingTable.children[i].children[1].appendChild(imageTag);
         imageTag.src = result[i].profile_image;
         
