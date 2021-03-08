@@ -97,6 +97,7 @@ function interval() {
         uploadScore(table.getScore(), table.getLevel());
         setTimeout(() => {
             rankingData();
+            updateHighest();
         }, 1000);
         return;
     }
@@ -362,7 +363,7 @@ async function getUserData() {
     });
 
     let result = await response.json();
-    console.log(result, typeof(result));
+    // console.log(result, typeof(result));
 
     const myName = document.querySelector('#myName');
     const myImage = document.querySelector('#myImage');
@@ -371,36 +372,35 @@ async function getUserData() {
     myName.textContent = result.userData.nickName;
     myImage.src = result.userData.profileImageURL;
     highScore.textContent = `Highest: ${result.highest}`;
+
+    shareScore(result.userData.nickName, result.highest);
+
+}
+
+async function updateHighest() {
+    let response = await fetch('/user-data-process', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+
+    let result = await response.json();
+
+    const highScore = document.querySelector('#highScore');
+
+    highScore.textContent = `Highest: ${result.highest}`;
 }
 
 // 카카오톡으로 공유하기
 kakaoInit();
 
-// document.querySelector('#kakao-link-btn').addEventListener('click', () => {
-//     Kakao.Link.sendDefault({
-//         objectType: 'feed',
-//         content: {
-//             title: '랜덤블록퍼즐',
-//             description: '같이 게임해요!!',
-//             imageUrl:
-//                 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/random-block-puzzle/img/share_img.jpg',
-//             link: {
-//                 webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
-//                 androidExecParams: 'test'
-//             }
-//         }
-//     });
-// });
-
-shareScore();
-function shareScore() {
-    const myName = document.querySelector('#myName');
-    const highScore = document.querySelector('#highScore');
+function shareScore(nickName, highest) {
     document.querySelector('#kakao-link-btn').addEventListener('click' || 'touchstart', () => {
         Kakao.Link.sendDefault({
             objectType: 'feed',
             content: {
-                title: `${myName.textContent}님의 최고점수 ${highScore.textContent}점!`,
+                title: `${nickName}님의 최고점수 ${highest}점!`,
                 description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
                 imageUrl:
                     'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/img/share_img.jpg',
