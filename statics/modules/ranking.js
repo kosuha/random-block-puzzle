@@ -37,7 +37,12 @@ async function rankingData() {
             rankingTable.children[i].children[1].removeChild(rankingTable.children[i].children[1].children[0]);
         }
         rankingTable.children[i].children[1].appendChild(imageTag);
-        imageTag.src = result[i].profile_image;
+        if (result[i].profile_image) {
+            imageTag.src = result[i].profile_image;
+        } else {
+            imageTag.src = './statics/img/share_img.jpg';
+        }
+        
         
         rankingTable.children[i].children[2].textContent = result[i].nickname_kakao;
         rankingTable.children[i].children[3].textContent = result[i].score;

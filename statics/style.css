@@ -204,7 +204,6 @@ button {
 
 #rankingTable>:nth-child(2)>:nth-child(1) {
     -webkit-text-stroke: 1px rgb(150, 150, 150);
-    
 }
 
 #rankingTable>:nth-child(3)>:nth-child(1) {
