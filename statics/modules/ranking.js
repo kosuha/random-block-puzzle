@@ -30,20 +30,24 @@ async function rankingData() {
     const rankingTable = document.querySelector('#rankingTable');
     for (let i = 0; i < result.length; i++) {
         rankingTable.children[i].children[0].textContent = i + 1;
-        
-        const imageTag = document.createElement('img');
-        imageTag.id = 'rankingProfileImage';
+
         if (rankingTable.children[i].children[1].children[0]) {
             rankingTable.children[i].children[1].removeChild(rankingTable.children[i].children[1].children[0]);
         }
-        rankingTable.children[i].children[1].appendChild(imageTag);
+
+        
         if (result[i].profile_image) {
+            const imageTag = document.createElement('img');
+            imageTag.id = 'rankingProfileImage';
             imageTag.src = result[i].profile_image;
+            rankingTable.children[i].children[1].appendChild(imageTag);
         } else {
-            imageTag.src = './statics/img/share_img.jpg';
+            const imageTag = document.createElement('div');
+            imageTag.id = 'rankingProfileImage';
+            rankingTable.children[i].children[1].appendChild(imageTag);
         }
-        
-        
+
+
         rankingTable.children[i].children[2].textContent = result[i].nickname_kakao;
         rankingTable.children[i].children[3].textContent = result[i].score;
     }
