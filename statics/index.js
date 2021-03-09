@@ -81,7 +81,7 @@ if (isMobile) {
             table.display();
             table.updateData(randomBlock.getCoordinates(), randomBlock.getColor(), randomBlock.getState());
             loop = setInterval(interval, table.getSpeed());
-            
+
             startState = true;
         }
     });
@@ -94,11 +94,11 @@ function interval() {
     if (table.gameOverCondition()) {
         clearInterval(loop);
         startState = false;
+
         uploadScore(table.getScore(), table.getLevel());
-        setTimeout(() => {
-            rankingData();
-            updateHighest();
-        }, 1000);
+        rankingData();
+        updateHighest();
+
         return;
     }
     if (randomBlock.getState() === false) {
