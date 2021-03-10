@@ -1,4 +1,4 @@
-import { isMobile, shareScore } from '../index.js';
+import { isMobile } from '../index.js';
 
 function generateRankingTable() {
     const rankingTable = document.querySelector('#rankingTable');

@@ -373,8 +373,6 @@ async function getUserData() {
     myImage.src = result.userData.profileImageURL;
     highScore.textContent = `Highest: ${result.highest}`;
 
-    shareScore(result.userData.nickName, result.highest);
-
 }
 
 async function updateHighest() {
@@ -388,29 +386,45 @@ async function updateHighest() {
     let result = await response.json();
 
     const highScore = document.querySelector('#highScore');
-
     highScore.textContent = `Highest: ${result.highest}`;
+
 }
 
 // 카카오톡으로 공유하기
 kakaoInit();
 
-function shareScore(nickName, highest) {
+function shareScore() {
     document.querySelector('#kakao-link-btn').addEventListener('click' || 'touchstart', () => {
-        Kakao.Link.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: `${nickName}님의 최고점수 ${highest}점!`,
-                description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
-                imageUrl:
-                    'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/img/share_img.jpg',
-                link: {
-                    webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
-                    androidExecParams: 'test'
+        async function shareHighest() {
+            let response = await fetch('/user-data-process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
                 }
-            }
-        });
+            });
+
+            let result = await response.json();
+
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: `${result.userData.nickName}님의 최고점수 ${result.highest}점!`,
+                    description: '내 점수 어때 ㅋㅋㅋㅋㅋ',
+                    imageUrl:
+                        'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com/img/share_img.jpg',
+                    link: {
+                        webUrl: 'http://ec2-3-35-14-224.ap-northeast-2.compute.amazonaws.com',
+                        androidExecParams: 'test'
+                    }
+                }
+            });
+
+        }
+
+        shareHighest();
     });
 }
 
-export { table, isMobile, shareScore };
+shareScore();
+
+export { table, isMobile };
